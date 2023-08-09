@@ -1,7 +1,6 @@
 package com.fssa.bitwallet.service;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.fssa.bitwallet.dao.CurrencyDao;
@@ -36,11 +35,11 @@ public class CurrencyServiceLayer {
 	}
 
 	public static List<Currency> readCurrency()
-			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+			throws IllegalArgumentException, InvalidInputException, SQLException {
 
 		return CurrencyDao.readFullList();
 
-	}
+	}  
 
 	public static boolean deleteCurrency(String name)
 			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
@@ -52,7 +51,7 @@ public class CurrencyServiceLayer {
 	} 
 
 	public static Currency findByName(String name)
-			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+			throws IllegalArgumentException, InvalidInputException, SQLException {
 		
 		if (CurrencyValidator.validateName(name)) {
 			return CurrencyDao.findCurrenciesByName(name);

@@ -12,8 +12,10 @@ public class ConnectionUtil {
 	public static Connection getConnection() {
         Connection con = null;
 
-        String url, userName, passWord;
-
+        String url;
+        String userName;
+        String passWord;
+ 
         if (System.getenv("CI") != null) {
             url = System.getenv("DATABASE_HOST");
             userName = System.getenv("DATABASE_USERNAME");
@@ -28,9 +30,7 @@ public class ConnectionUtil {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(url, userName, passWord);
-            System.out.println("Connections created ");
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException("Unable to connect to the database");
         }
         return con;
@@ -52,9 +52,6 @@ public class ConnectionUtil {
 			e.printStackTrace();
 			// No need re throw the exception.
 		}
-	}
-	public static void main(String[] args) {
-		ConnectionUtil.getConnection();
 	}
 	
 

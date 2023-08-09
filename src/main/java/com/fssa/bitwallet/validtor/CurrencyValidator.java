@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.crypto.Cipher;
-
 import com.fssa.bitwallet.errors.CurrencyValidatorErrors;
 import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.Currency;
@@ -52,7 +50,7 @@ public class CurrencyValidator {
 		Matcher matcher = pattern.matcher(name);
 		Boolean isMatch = matcher.matches();
 
-		if (!isMatch) {
+		if (Boolean.FALSE.equals(isMatch)) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_NAME_PATTERN);
 		}
 
@@ -70,7 +68,7 @@ public class CurrencyValidator {
 		Matcher matcher = pattern.matcher(symbol);
 		Boolean isMatch = matcher.matches();
 
-		if (!isMatch) {
+		if (Boolean.FALSE.equals(isMatch)) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_SYMBOL_PATTERN);
 		}
 

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.fssa.bitwallet.errors.CurrencyDaoErrors;
 import com.fssa.bitwallet.errors.DaoException;
@@ -57,26 +58,30 @@ public class CurrencyDao {
 
 				try (ResultSet resultSet = pst.executeQuery()) {
 
-					while (resultSet.next()) {
-						currency = new Currency();
-						currency.setId(resultSet.getInt("id"));
-						currency.setName(resultSet.getString("name"));
-						currency.setSymbol(resultSet.getString("symbol"));
-						currency.setRank(resultSet.getInt("ranking"));
-						currency.setPrice(resultSet.getDouble("price"));
-						currency.setMarketCap(resultSet.getDouble("market_cap"));
-						currency.setTotalSupply(resultSet.getDouble("total_supply"));
-						currency.setMaximumSupply(resultSet.getDouble("maximum_supply"));
-						currency.setVolume24h(resultSet.getDouble("volume_24h"));
-						currency.setAllTimeHigh(resultSet.getDouble("all_time_high"));
-						currency.setAllTimeLow(resultSet.getDouble("all_time_low"));
-						currency.setCreationDate(resultSet.getDate("creationdate").toLocalDate());
-
-					}
+					if (resultSet.next()) {
+                        currency = mapResultSetToCurrency(resultSet);
+                    }
 				}
 			}
 		}
 
+		return currency;
+	}
+
+	public static Currency mapResultSetToCurrency(ResultSet resultSet) throws SQLException {
+		Currency currency = new Currency();
+		currency.setId(resultSet.getInt("id"));
+		currency.setName(resultSet.getString("name"));
+		currency.setSymbol(resultSet.getString("symbol"));
+		currency.setRank(resultSet.getInt("ranking"));
+		currency.setPrice(resultSet.getDouble("price"));
+		currency.setMarketCap(resultSet.getDouble("market_cap"));
+		currency.setTotalSupply(resultSet.getDouble("total_supply"));
+		currency.setMaximumSupply(resultSet.getDouble("maximum_supply"));
+		currency.setVolume24h(resultSet.getDouble("volume_24h"));
+		currency.setAllTimeHigh(resultSet.getDouble("all_time_high"));
+		currency.setAllTimeLow(resultSet.getDouble("all_time_low"));
+		currency.setCreationDate(resultSet.getDate("creationdate").toLocalDate());
 		return currency;
 	}
 
@@ -101,9 +106,9 @@ public class CurrencyDao {
 				System.out.println(pst);
 
 				int rows = pst.executeUpdate();
-				System.out.println(rows +"jj");
+				System.out.println(rows + "jj");
 				if (rows == 0) {
-
+					
 					throw new DaoException(CurrencyDaoErrors.ROWS_AFFECTED); // if no rows are affected, throw an
 																				// exception
 				}
@@ -113,7 +118,7 @@ public class CurrencyDao {
 		return true;
 	}
 
-	public static ArrayList readFullList() throws SQLException, DaoException {
+	public static List<Currency> readFullList() throws SQLException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
@@ -125,20 +130,7 @@ public class CurrencyDao {
 				try (ResultSet resultSet = pst.executeQuery()) {
 
 					while (resultSet.next()) {
-						Currency currency = new Currency();
-						currency.setId(resultSet.getInt("id"));
-						currency.setName(resultSet.getString("name"));
-						currency.setSymbol(resultSet.getString("symbol"));
-						currency.setRank(resultSet.getInt("ranking"));
-						currency.setPrice(resultSet.getDouble("price"));
-						currency.setMarketCap(resultSet.getDouble("market_cap"));
-						currency.setTotalSupply(resultSet.getDouble("total_supply"));
-						currency.setMaximumSupply(resultSet.getDouble("maximum_supply"));
-						currency.setVolume24h(resultSet.getDouble("volume_24h"));
-						currency.setAllTimeHigh(resultSet.getDouble("all_time_high"));
-						currency.setAllTimeLow(resultSet.getDouble("all_time_low"));
-						currency.setCreationDate(resultSet.getDate("creationdate").toLocalDate());
-
+						Currency currency = mapResultSetToCurrency(resultSet);
 						list.add(currency);
 					}
 				}
@@ -167,27 +159,10 @@ public class CurrencyDao {
 					throw new DaoException(CurrencyDaoErrors.ROWS_AFFECTED); // if no rows are affected, throw an //
 																				// exception
 				}
-				System.out.println(rows);
 			}
 		}
 
 		return true;
 	}
-
-//	public static void main(String[] args) throws Exception {
-
-//		Currency currency = new Currency(1, "Etherieum", "sdfghj", 2, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
-
-//		Currency currency = new Currency();
-
-//		createCurrency(currency);
-//		System.out.println(toString(findCurrenciesByName("Dogecoin")));
-		
-		
-
-//		update("Tether","EE",20);
-//		delete("Tether");
-
-//	}
 
 }

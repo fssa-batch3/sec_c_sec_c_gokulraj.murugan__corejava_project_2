@@ -3,7 +3,6 @@ package com.fssa.bitwallet.service;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -25,103 +24,95 @@ public class TestCurrencyServiceLayer {
 		return currency;
 	}
 
-	
 	@Test
 	@Order(1)
-	public void testAddCurrency() throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+	void testAddCurrency() throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		Currency curr = getValidCurrency();
-		
+
 		Assertions.assertTrue(CurrencyServiceLayer.addCurrency(curr));
 	}
 
 	@Test
 	@Order(1)
-	public void testAddCurrencyNull() {
+	void testAddCurrencyNull() {
 
 		Currency curr = null;
-	
+
 		try {
 			CurrencyServiceLayer.addCurrency(curr);
 		} catch (IllegalArgumentException | InvalidInputException | SQLException | DaoException e) {
-			
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_CURRENCY_NULL,e.getMessage());
+
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_CURRENCY_NULL, e.getMessage());
 		}
 	}
 
-
 	@Test
 	@Order(2)
-	public void testUpdateCurrency()  throws IllegalArgumentException, InvalidInputException, SQLException, DaoException{
+	void testUpdateCurrency() throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		String name = getValidCurrency().getName();
 		String symbol = "TETJ";
 		int rank = 20;
-		
+
 		Assertions.assertTrue(CurrencyServiceLayer.updateCurrency(name, symbol, rank));
 	}
 
 	@Test
 	@Order(2)
-	public void testUpdateCurrencyInVaild() {
- 
-		try {	
+	void testUpdateCurrencyInVaild() {
+
+		try {
 			CurrencyServiceLayer.updateCurrency("  ", "ABC", 5);
 		} catch (Exception e) {
 
-			Assertions.assertEquals(e.getMessage(), CurrencyValidatorErrors.INVALID_NAME);
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_NAME, e.getMessage());
 		}
 	}
 
-	
 	@Test
 	@Order(4)
-	 void testDeleteCurreny()  throws IllegalArgumentException, InvalidInputException, SQLException, DaoException{
-		
-		Assertions.assertTrue(CurrencyServiceLayer.deleteCurrency("Tether"));
+	void testDeleteCurreny() throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+
+		Assertions.assertTrue(CurrencyServiceLayer.deleteCurrency("Dogecoin"));
 
 	}
 
- 
 	@Test
 	@Order(4)
-	 void testDeleteCurrencyInvalid() {
+	void testDeleteCurrencyInvalid() {
 
 		try {
 			CurrencyServiceLayer.deleteCurrency(null);
 		} catch (Exception e) {
-			Assertions.assertEquals(e.getMessage(), CurrencyValidatorErrors.INVALID_NAME);
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_NAME, e.getMessage());
 		}
 
 	}
-	
+
 	@Test
 	@Order(3)
-	 void testFindCurrenyByName()  throws IllegalArgumentException, InvalidInputException, SQLException, DaoException{
-		
+	void testFindCurrenyByName() throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+
 		Currency currency = new Currency(5, "Dogecoin", "DTC", 10, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
-		
+
 //		CurrencyServiceLayer.addCurrency(currency);
-		
-		CurrencyServiceLayer.addCurrency(currency);
-		
+
 		Assertions.assertEquals(CurrencyServiceLayer.findByName(currency.getName()).getSymbol(), currency.getSymbol());
 
 	}
-	
+
 	@Test
 	@Order(3)
 	void testFindByNameInvalid() {
-		
+
 		String coinName = null;
 		try {
 			CurrencyServiceLayer.findByName(coinName);
-		} catch (IllegalArgumentException | InvalidInputException | SQLException | DaoException e) {
-			
+		} catch (IllegalArgumentException | InvalidInputException | SQLException e) {
+
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_NAME, e.getMessage());
 		}
 	}
-	
-	
 
 }

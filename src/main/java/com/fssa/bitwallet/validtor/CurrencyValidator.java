@@ -13,7 +13,7 @@ import com.fssa.bitwallet.model.Currency;
 public class CurrencyValidator {
 
 	// Validate a object
-	public static boolean validate(Currency currency) throws Exception {
+	public static boolean validate(Currency currency) throws InvalidInputException, IllegalArgumentException {
 
 		if (currency == null) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_CURRENCY_NULL);
@@ -33,7 +33,7 @@ public class CurrencyValidator {
 	}
 
 	// Validation for Id
-	public static boolean validateId(int id) throws Exception {
+	public static boolean validateId(int id) throws InvalidInputException, IllegalArgumentException {
 
 		if (id <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_ID);
@@ -41,7 +41,7 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateName(String name) throws Exception {
+	public static boolean validateName(String name) throws InvalidInputException, IllegalArgumentException {
 
 		if (name == null || name.trim().equals("")) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_NAME);
@@ -59,7 +59,7 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateSymbol(String symbol) throws Exception {
+	public static boolean validateSymbol(String symbol) throws InvalidInputException, IllegalArgumentException {
 
 		if (symbol == null || symbol.trim().equals("")) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_SYMBOL);
@@ -78,7 +78,7 @@ public class CurrencyValidator {
 	}
 
 	// Validation for Rank
-	public static boolean validateRank(int rank) throws Exception {
+	public static boolean validateRank(int rank) throws InvalidInputException, IllegalArgumentException {
 		if (rank <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_RANK);
 		}
@@ -86,7 +86,7 @@ public class CurrencyValidator {
 	}
 
 	// Validation for Price
-	public static boolean validatePrice(double price) throws Exception {
+	public static boolean validatePrice(double price) throws InvalidInputException, IllegalArgumentException {
 
 		if (price <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_PRICE);
@@ -94,7 +94,7 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateMarketCap(double marketCap) throws Exception {
+	public static boolean validateMarketCap(double marketCap) throws InvalidInputException, IllegalArgumentException {
 
 		if (marketCap <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_MARKET_CAP);
@@ -102,7 +102,8 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateTotalSupply(double totalSupply) throws Exception {
+	public static boolean validateTotalSupply(double totalSupply)
+			throws InvalidInputException, IllegalArgumentException {
 
 		if (totalSupply <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_TOTAL_SUPPLY);
@@ -110,7 +111,8 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateMaximumSupply(double maximumSupply) throws Exception {
+	public static boolean validateMaximumSupply(double maximumSupply)
+			throws InvalidInputException, IllegalArgumentException {
 
 		if (maximumSupply <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_MAXIMUM_SUPPLY);
@@ -118,7 +120,7 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateVolume24h(double volume24h) throws Exception {
+	public static boolean validateVolume24h(double volume24h) throws InvalidInputException, IllegalArgumentException {
 
 		if (volume24h <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_VOLUME_24H);
@@ -126,7 +128,8 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateAllTimeHigh(double allTimeHigh) throws Exception {
+	public static boolean validateAllTimeHigh(double allTimeHigh)
+			throws InvalidInputException, IllegalArgumentException {
 
 		if (allTimeHigh <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_All_TIME_HIGH);
@@ -134,7 +137,7 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateAllTimeLow(double allTimeLow) throws Exception {
+	public static boolean validateAllTimeLow(double allTimeLow) throws InvalidInputException, IllegalArgumentException {
 
 		if (allTimeLow <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_All_TIME_LOW);
@@ -142,7 +145,7 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	public static boolean validateCreationDate(LocalDate date) throws Exception {
+	public static boolean validateCreationDate(LocalDate date) throws InvalidInputException, IllegalArgumentException {
 
 		LocalDate today = LocalDate.now();
 		if (date == null) {

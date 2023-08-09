@@ -35,6 +35,7 @@ public class ConnectionUtil {
         }
         return con;
     }
+
 	public static void close(Connection conn, Statement stmt, ResultSet rs) {
 
 		try {
@@ -52,5 +53,9 @@ public class ConnectionUtil {
 			// No need re throw the exception.
 		}
 	}
+	public static void main(String[] args) {
+		ConnectionUtil.getConnection();
+	}
+	
 
 }

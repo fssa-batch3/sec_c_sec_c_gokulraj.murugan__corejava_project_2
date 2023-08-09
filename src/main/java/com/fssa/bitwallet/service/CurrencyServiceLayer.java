@@ -2,47 +2,70 @@ package com.fssa.bitwallet.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.fssa.bitwallet.dao.CurrencyDao;
+import com.fssa.bitwallet.errors.DaoException;
+import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.Currency;
 import com.fssa.bitwallet.validtor.CurrencyValidator;
 
 public class CurrencyServiceLayer {
 
-	public static boolean addCurrency(Currency currency) throws Exception {
+	public static boolean addCurrency(Currency currency)
+			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		if (CurrencyValidator.validate(currency)) {
 
 			return CurrencyDao.createCurrency(currency);
- 
+
 		}
-		return false;
+		return true;
 	}
 
-	public static boolean updateCurrency(String name, String symbol, int rank) throws Exception {
+	public static boolean updateCurrency(String name, String symbol, int rank)
+			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		if (CurrencyValidator.validateName(name) && CurrencyValidator.validateSymbol(symbol)
 				&& CurrencyValidator.validateRank(rank)) {
 
-			boolean result = CurrencyDao.update(name, symbol, rank);
-			return result;
+			return CurrencyDao.update(name, symbol, rank);
 		}
 
-		return false;
+		return true;
 	}
 
-	public static ArrayList readCurrency() throws SQLException {
+	public static List<Currency> readCurrency()
+			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		return CurrencyDao.readFullList();
 
 	}
 
-	public static boolean deleteCurrency(String name) throws Exception {
+	public static boolean deleteCurrency(String name)
+			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		if (CurrencyValidator.validateName(name)) {
 			return CurrencyDao.delete(name);
 		}
-		return false;
+		return true;
+	} 
+
+	public static Currency findByName(String name)
+			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+		
+		if (CurrencyValidator.validateName(name)) {
+			return CurrencyDao.findCurrenciesByName(name);
+		}
+		return null;
+
+		
+	}
+	
+	public static void main(String[] args) throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+		
+		System.out.println(findByName("Dogecoin"));
+		
 	}
 
 }

@@ -1,18 +1,22 @@
 package com.fssa.bitwallet.service;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import com.fssa.bitwallet.errors.CurrencyValidatorErrors;
+import com.fssa.bitwallet.errors.DaoException;
+import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.Currency;
 
 public class TestCurrencyServiceLayer {
 
 	public static Currency getValidCurrency() {
-		Currency currency = new Currency(5, "Tether", "TRC", 78, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
+		Currency currency = new Currency(5, "Tether", "TRC", 38, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
 		return currency;
 	}
 
@@ -21,11 +25,13 @@ public class TestCurrencyServiceLayer {
 		return currency;
 	}
 
+	
 	@Test
 	@Order(1)
-	public void testAddCurrency() throws Exception {
+	public void testAddCurrency() throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		Currency curr = getValidCurrency();
+		
 		Assertions.assertTrue(CurrencyServiceLayer.addCurrency(curr));
 	}
 
@@ -34,38 +40,32 @@ public class TestCurrencyServiceLayer {
 	public void testAddCurrencyNull() {
 
 		Currency curr = null;
+	
 		try {
-
 			CurrencyServiceLayer.addCurrency(curr);
-		} catch (Exception e) {
-
-			Assertions.assertEquals(e.getMessage(), CurrencyValidatorErrors.INVALID_CURRENCY_NULL);
+		} catch (IllegalArgumentException | InvalidInputException | SQLException | DaoException e) {
+			
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_CURRENCY_NULL,e.getMessage());
 		}
 	}
 
-//	@Test
-//	public void testAddCurrencyInvalid() {
-//		try {
-//			Currency curr = getInValidCurrency();
-//			Assertions.assertFalse(CurrencyServiceLayer.addCurrency(curr));
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
-//
-//	}
 
 	@Test
 	@Order(2)
-	public void testUpdateCurrency() throws Exception {
+	public void testUpdateCurrency()  throws IllegalArgumentException, InvalidInputException, SQLException, DaoException{
 
-		Assertions.assertTrue(CurrencyServiceLayer.updateCurrency("Tether", "ABC", 5));
+		String name = getValidCurrency().getName();
+		String symbol = "TETJ";
+		int rank = 20;
+		
+		Assertions.assertTrue(CurrencyServiceLayer.updateCurrency(name, symbol, rank));
 	}
 
 	@Test
 	@Order(2)
 	public void testUpdateCurrencyInVaild() {
-
-		try {
+ 
+		try {	
 			CurrencyServiceLayer.updateCurrency("  ", "ABC", 5);
 		} catch (Exception e) {
 
@@ -73,19 +73,20 @@ public class TestCurrencyServiceLayer {
 		}
 	}
 
+	
 	@Test
-	@Order(3)
-	public void testDeleteCurreny() throws Exception {
-
+	@Order(4)
+	 void testDeleteCurreny()  throws IllegalArgumentException, InvalidInputException, SQLException, DaoException{
+		
 		Assertions.assertTrue(CurrencyServiceLayer.deleteCurrency("Tether"));
 
 	}
 
+ 
 	@Test
-	@Order(3)
-	public void testDeleteCurrencyInvalid() {
+	@Order(4)
+	 void testDeleteCurrencyInvalid() {
 
-		Currency curr = getValidCurrency();
 		try {
 			CurrencyServiceLayer.deleteCurrency(null);
 		} catch (Exception e) {
@@ -93,5 +94,34 @@ public class TestCurrencyServiceLayer {
 		}
 
 	}
+	
+	@Test
+	@Order(3)
+	 void testFindCurrenyByName()  throws IllegalArgumentException, InvalidInputException, SQLException, DaoException{
+		
+		Currency currency = new Currency(5, "Dogecoin", "DTC", 10, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
+		
+//		CurrencyServiceLayer.addCurrency(currency);
+		
+		CurrencyServiceLayer.addCurrency(currency);
+		
+		Assertions.assertEquals(CurrencyServiceLayer.findByName(currency.getName()).getSymbol(), currency.getSymbol());
+
+	}
+	
+	@Test
+	@Order(3)
+	void testFindByNameInvalid() {
+		
+		String coinName = null;
+		try {
+			CurrencyServiceLayer.findByName(coinName);
+		} catch (IllegalArgumentException | InvalidInputException | SQLException | DaoException e) {
+			
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_NAME, e.getMessage());
+		}
+	}
+	
+	
 
 }

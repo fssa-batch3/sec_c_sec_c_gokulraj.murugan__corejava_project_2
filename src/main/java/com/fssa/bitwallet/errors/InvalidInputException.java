@@ -9,11 +9,5 @@ public class InvalidInputException extends Exception {
 		super(msg);
 	}
 
-	public InvalidInputException(Throwable te) {
-		super(te);
-	}
 
-	public InvalidInputException(String msg, Throwable te) {
-		super(msg, te);
-	}
 }

@@ -17,7 +17,7 @@ public class TestCurrencyValidator {
 			LocalDate.of(2025, 3, 4));
 
 	@Test
-	public void testValidate() throws Exception {
+	public void testValidate() throws InvalidInputException, IllegalArgumentException {
 		Assertions.assertTrue(CurrencyValidator.validate(curr));
 	}
 
@@ -27,7 +27,8 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validate(currrencynull);
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_CURRENCY_NULL, e.getMessage());
 		}
 	}
@@ -45,7 +46,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateId(inValidCurrency.getId());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_ID, e.getMessage());
 		}
 
@@ -64,7 +65,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateRank(inValidCurrency.getRank());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_RANK, e.getMessage());
 		}
 
@@ -82,7 +83,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validatePrice(inValidCurrency.getPrice());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_PRICE, e.getMessage());
 		}
 
@@ -100,7 +101,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateMarketCap(inValidCurrency.getMarketCap());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_MARKET_CAP, e.getMessage());
 		}
 
@@ -117,8 +118,10 @@ public class TestCurrencyValidator {
 	public void testNegativeValidateTotalSupply() {
 		try {
 			CurrencyValidator.validateTotalSupply(inValidCurrency.getTotalSupply());
+
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_TOTAL_SUPPLY, e.getMessage());
 		}
 
@@ -136,7 +139,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateMaximumSupply(inValidCurrency.getMaximumSupply());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_MAXIMUM_SUPPLY, e.getMessage());
 		}
 
@@ -154,7 +157,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateVolume24h(inValidCurrency.getVolume24h());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_VOLUME_24H, e.getMessage());
 		}
 	}
@@ -171,7 +174,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateAllTimeHigh(inValidCurrency.getAllTimeHigh());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_All_TIME_HIGH, e.getMessage());
 		}
 	}
@@ -189,7 +192,7 @@ public class TestCurrencyValidator {
 
 			CurrencyValidator.validateAllTimeLow(inValidCurrency.getAllTimeLow());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_All_TIME_LOW, e.getMessage());
 		}
 	}
@@ -206,7 +209,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateName(inValidCurrency.getName());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_NAME, e.getMessage());
 		}
 	}
@@ -216,7 +219,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateName("fjeii32joi");
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_NAME_PATTERN, e.getMessage());
 		}
 	}
@@ -233,7 +236,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateSymbol(inValidCurrency.getSymbol());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_SYMBOL, e.getMessage());
 		}
 	}
@@ -243,7 +246,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateSymbol("btc");
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_SYMBOL_PATTERN, e.getMessage());
 		}
 	}
@@ -261,7 +264,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateCreationDate(null);
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_DATE_NULL, e.getMessage());
 		}
 	}
@@ -271,7 +274,7 @@ public class TestCurrencyValidator {
 		try {
 			CurrencyValidator.validateCreationDate(inValidCurrency.getCreationDate());
 			Assertions.fail("Test case failed");
-		} catch (Exception e) {
+		} catch (InvalidInputException e) {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_DATE_FORMAT, e.getMessage());
 		}
 	}

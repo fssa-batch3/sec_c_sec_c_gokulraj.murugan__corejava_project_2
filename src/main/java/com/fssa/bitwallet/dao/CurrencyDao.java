@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fssa.bitwallet.errors.CurrencyDaoErrors;
 import com.fssa.bitwallet.errors.DaoException;
 import com.fssa.bitwallet.model.Currency;
 
@@ -35,13 +34,10 @@ public class CurrencyDao {
 
 				int rows = pst.executeUpdate();
 
-				if (rows == 0) {
-					throw new DaoException(CurrencyDaoErrors.ROWS_AFFECTED);
-				}
+				return rows > 0;
 			}
 		}
 
-		return true;
 	}
 
 	public static Currency findCurrenciesByName(String name) throws SQLException {
@@ -59,8 +55,8 @@ public class CurrencyDao {
 				try (ResultSet resultSet = pst.executeQuery()) {
 
 					if (resultSet.next()) {
-                        currency = mapResultSetToCurrency(resultSet);
-                    }
+						currency = mapResultSetToCurrency(resultSet);
+					}
 				}
 			}
 		}
@@ -103,19 +99,14 @@ public class CurrencyDao {
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				pst.setString(1, name);
-				System.out.println(pst);
 
 				int rows = pst.executeUpdate();
-				System.out.println(rows + "jj");
-				if (rows == 0) {
-					
-					throw new DaoException(CurrencyDaoErrors.ROWS_AFFECTED); // if no rows are affected, throw an
-																				// exception
-				}
+
+				return rows > 0;
 
 			}
 		}
-		return true;
+
 	}
 
 	public static List<Currency> readFullList() throws SQLException {
@@ -154,15 +145,11 @@ public class CurrencyDao {
 
 				int rows = pst.executeUpdate();
 
-				if (rows == 0) {
+				return rows > 0;
 
-					throw new DaoException(CurrencyDaoErrors.ROWS_AFFECTED); // if no rows are affected, throw an //
-																				// exception
-				}
 			}
 		}
 
-		return true;
 	}
 
 }

@@ -17,12 +17,12 @@ public class TestCurrencyValidator {
 			LocalDate.of(2025, 3, 4));
 
 	@Test
-	public void testValidate() throws InvalidInputException, IllegalArgumentException {
+	 void testValidate() throws InvalidInputException, IllegalArgumentException {
 		Assertions.assertTrue(CurrencyValidator.validate(curr));
 	}
 
 	@Test
-	public void testNullCurrencyValidate() {
+	 void testNullCurrencyValidate() {
 		Currency currrencynull = null;
 		try {
 			CurrencyValidator.validate(currrencynull);
@@ -34,7 +34,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateId() throws Exception {
+	 void testValidateId() throws Exception {
 
 		curr.setId(curr.getId());
 		Assertions.assertTrue(CurrencyValidator.validateId(curr.getId()));
@@ -42,7 +42,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testNegativeValidatId() {
+	 void testNegativeValidatId() {
 		try {
 			CurrencyValidator.validateId(inValidCurrency.getId());
 			Assertions.fail("Test case failed");
@@ -53,7 +53,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateRank() throws Exception {
+	 void testValidateRank() throws Exception {
 
 		curr.setRank(curr.getRank());
 		Assertions.assertTrue(CurrencyValidator.validateRank(curr.getRank()));
@@ -61,7 +61,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testNegativeValidatRank() {
+ void testNegativeValidatRank() {
 		try {
 			CurrencyValidator.validateRank(inValidCurrency.getRank());
 			Assertions.fail("Test case failed");
@@ -72,14 +72,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidatePrice() throws Exception {
+	 void testValidatePrice() throws Exception {
 
 		curr.setPrice(curr.getPrice());
 		Assertions.assertTrue(CurrencyValidator.validatePrice(curr.getPrice()));
 	}
 
 	@Test
-	public void testNegativeValidatPrice() {
+	 void testNegativeValidatPrice() {
 		try {
 			CurrencyValidator.validatePrice(inValidCurrency.getPrice());
 			Assertions.fail("Test case failed");
@@ -90,14 +90,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateMarketCap() throws Exception {
+	 void testValidateMarketCap() throws Exception {
 
 		curr.setMarketCap(curr.getMarketCap());
 		Assertions.assertTrue(CurrencyValidator.validateMarketCap(curr.getMarketCap()));
 	}
 
 	@Test
-	public void testNegativeValidatMarketCap() {
+	 void testNegativeValidatMarketCap() {
 		try {
 			CurrencyValidator.validateMarketCap(inValidCurrency.getMarketCap());
 			Assertions.fail("Test case failed");
@@ -108,14 +108,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateTotalSupply() throws Exception {
+	 void testValidateTotalSupply() throws Exception {
 
 		curr.setTotalSupply(curr.getTotalSupply());
 		Assertions.assertTrue(CurrencyValidator.validateTotalSupply(curr.getTotalSupply()));
 	}
 
 	@Test
-	public void testNegativeValidateTotalSupply() {
+	 void testNegativeValidateTotalSupply() {
 		try {
 			CurrencyValidator.validateTotalSupply(inValidCurrency.getTotalSupply());
 
@@ -128,14 +128,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateMaximumSupply() throws Exception {
+	 void testValidateMaximumSupply() throws Exception {
 
 		curr.setMaximumSupply(curr.getMaximumSupply());
 		Assertions.assertTrue(CurrencyValidator.validateMaximumSupply(curr.getMaximumSupply()));
 	}
 
 	@Test
-	public void testNegativeValidatMaximumSupply() {
+	 void testNegativeValidatMaximumSupply() {
 		try {
 			CurrencyValidator.validateMaximumSupply(inValidCurrency.getMaximumSupply());
 			Assertions.fail("Test case failed");
@@ -146,14 +146,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateVolume24h() throws Exception {
+	 void testValidateVolume24h() throws Exception {
 
 		curr.setVolume24h(curr.getVolume24h());
 		Assertions.assertTrue(CurrencyValidator.validateVolume24h(curr.getVolume24h()));
 	}
 
 	@Test
-	public void testNegativeValidateVolume24h() {
+	 void testNegativeValidateVolume24h() {
 		try {
 			CurrencyValidator.validateVolume24h(inValidCurrency.getVolume24h());
 			Assertions.fail("Test case failed");
@@ -163,14 +163,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateAllTimeHigh() throws Exception {
+	 void testValidateAllTimeHigh() throws Exception {
 
 		curr.setAllTimeHigh(curr.getAllTimeHigh());
 		Assertions.assertTrue(CurrencyValidator.validateAllTimeHigh(curr.getAllTimeHigh()));
 	}
 
 	@Test
-	public void testNegativeValidateAllTimeHigh() {
+	 void testNegativeValidateAllTimeHigh() {
 		try {
 			CurrencyValidator.validateAllTimeHigh(inValidCurrency.getAllTimeHigh());
 			Assertions.fail("Test case failed");
@@ -180,14 +180,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateAllTimeLow() throws Exception {
+	 void testValidateAllTimeLow() throws Exception {
 
 		curr.setAllTimeLow(curr.getAllTimeLow());
 		Assertions.assertTrue(CurrencyValidator.validateAllTimeLow(curr.getAllTimeLow()));
 	}
 
 	@Test
-	public void testNegativeValidateAllTimeLow() {
+	 void testNegativeValidateAllTimeLow() {
 		try {
 
 			CurrencyValidator.validateAllTimeLow(inValidCurrency.getAllTimeLow());
@@ -198,14 +198,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateName() throws Exception {
+	 void testValidateName() throws Exception {
 
 		curr.setName(curr.getName());
 		Assertions.assertTrue(CurrencyValidator.validateName(curr.getName()));
 	}
 
 	@Test
-	public void testNullValidateName() {
+	 void testNullValidateName() {
 		try {
 			CurrencyValidator.validateName(inValidCurrency.getName());
 			Assertions.fail("Test case failed");
@@ -215,7 +215,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testInvalidName() {
+	 void testInvalidName() {
 		try {
 			CurrencyValidator.validateName("fjeii32joi");
 			Assertions.fail("Test case failed");
@@ -225,14 +225,14 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateSymbol() throws Exception {
+	 void testValidateSymbol() throws Exception {
 		curr.setSymbol(curr.getSymbol());
 		Assertions.assertTrue(CurrencyValidator.validateSymbol(curr.getSymbol()));
 
 	}
 
 	@Test
-	public void testNullValidateSymbol() {
+	 void testNullValidateSymbol() {
 		try {
 			CurrencyValidator.validateSymbol(inValidCurrency.getSymbol());
 			Assertions.fail("Test case failed");
@@ -242,7 +242,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testInvalidSymbol() {
+	 void testInvalidSymbol() {
 		try {
 			CurrencyValidator.validateSymbol("btc");
 			Assertions.fail("Test case failed");
@@ -252,7 +252,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testValidateCreationDate() throws Exception {
+	 void testValidateCreationDate() throws Exception {
 
 		curr.setCreationDate(curr.getCreationDate());
 		Assertions.assertTrue(CurrencyValidator.validateCreationDate(curr.getCreationDate()));
@@ -260,7 +260,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testNullValidateDate() {
+	 void testNullValidateDate() {
 		try {
 			CurrencyValidator.validateCreationDate(null);
 			Assertions.fail("Test case failed");
@@ -270,7 +270,7 @@ public class TestCurrencyValidator {
 	}
 
 	@Test
-	public void testInValidateDate() {
+	 void testInValidateDate() {
 		try {
 			CurrencyValidator.validateCreationDate(inValidCurrency.getCreationDate());
 			Assertions.fail("Test case failed");

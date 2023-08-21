@@ -81,15 +81,6 @@ public class CurrencyDao {
 		return currency;
 	}
 
-	public static String toString(Currency currency) {
-		return "id :" + currency.getId() + "\nName :" + currency.getName() + "\nRank :" + currency.getRank()
-				+ "\nPrice:" + currency.getPrice() + "\nMarket Supply:" + currency.getTotalSupply()
-				+ "\nMaximum Supply: " + currency.getMaximumSupply() + "\nVolume 24h: " + currency.getVolume24h()
-				+ "\nAll Time High: " + currency.getAllTimeHigh() + "\nAll Time Low: " + currency.getAllTimeLow()
-				+ "\nCreation Date: " + currency.getCreationDate();
-
-	}
-
 	public static boolean delete(String name) throws SQLException, DaoException {
 
 		String query = "DELETE FROM currency WHERE name = ?";

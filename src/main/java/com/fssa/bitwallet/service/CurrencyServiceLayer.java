@@ -16,7 +16,7 @@ public class CurrencyServiceLayer {
 
 		if (CurrencyValidator.validate(currency)) {
 
-			return CurrencyDao.createCurrency(currency);
+			CurrencyDao.createCurrency(currency);
 
 		}
 		return true;
@@ -28,43 +28,42 @@ public class CurrencyServiceLayer {
 		if (CurrencyValidator.validateName(name) && CurrencyValidator.validateSymbol(symbol)
 				&& CurrencyValidator.validateRank(rank)) {
 
-			return CurrencyDao.update(name, symbol, rank);
+			CurrencyDao.update(name, symbol, rank);
 		}
 
 		return true;
 	}
 
-	public static List<Currency> readCurrency()
-			throws IllegalArgumentException, InvalidInputException, SQLException {
+	public static boolean readCurrency() throws IllegalArgumentException, InvalidInputException, SQLException {
+		printCurrency(CurrencyDao.readFullList());
 
-		return CurrencyDao.readFullList();
+		return true;
 
-	}  
+	}
 
 	public static boolean deleteCurrency(String name)
 			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
 
 		if (CurrencyValidator.validateName(name)) {
-			return CurrencyDao.delete(name);
+			CurrencyDao.delete(name);
 		}
 		return true;
-	} 
+	}
 
 	public static Currency findByName(String name)
 			throws IllegalArgumentException, InvalidInputException, SQLException {
-		
+
 		if (CurrencyValidator.validateName(name)) {
-			return CurrencyDao.findCurrenciesByName(name);
+			CurrencyDao.findCurrenciesByName(name);
 		}
 		return null;
 
-		
 	}
-	
-	public static void main(String[] args) throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
-		
-		System.out.println(findByName("Dogecoin"));
-		
+
+	public static void printCurrency(List<Currency> cur) {
+		for (Currency currency : cur) {
+			System.out.println(currency);
+		}
 	}
 
 }

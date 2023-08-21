@@ -27,7 +27,7 @@ public class CurrencyDao {
      * @throws DaoException If a DAO specific error occurs.
      */
 	
-	public static boolean createCurrency(Currency currency) throws SQLException, DaoException {
+	public static boolean createCurrency(Currency currency) throws SQLException {
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -120,7 +120,7 @@ public class CurrencyDao {
      * @throws DaoException If a DAO specific error occurs.
      */
 	
-	public static boolean delete(String name) throws SQLException, DaoException {
+	public static boolean delete(String name) throws SQLException {
 
 		String query = "DELETE FROM currency WHERE name = ?";
 

@@ -53,10 +53,11 @@ public class CurrencyServiceLayer {
 	public static Currency findByName(String name)
 			throws IllegalArgumentException, InvalidInputException, SQLException {
 
+		Currency cuu = null;
 		if (CurrencyValidator.validateName(name)) {
-			CurrencyDao.findCurrenciesByName(name);
+			 cuu = CurrencyDao.findCurrenciesByName(name);
 		}
-		return null;
+		return cuu;
 
 	}
 

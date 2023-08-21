@@ -21,7 +21,7 @@ public class CurrencyValidator {
 		validateRank(currency.getRank());
 		validatePrice(currency.getPrice());
 		validateMarketCap(currency.getMarketCap());
-		validateTotalSupply(currency.getTotalSupply());
+		validateTotalSupply(currency.getTotalSupply());  
 		validateMaximumSupply(currency.getMaximumSupply());
 		validateVolume24h(currency.getVolume24h());
 		validateAllTimeHigh(currency.getAllTimeHigh());

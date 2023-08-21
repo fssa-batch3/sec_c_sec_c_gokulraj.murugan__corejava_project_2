@@ -54,10 +54,13 @@ public class TestCurrencyServiceLayer {
 
 		Currency currency = new Currency(5, "Dogecoin", "DTC", 10, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
 
+//		Currency cu = getValidCurrency();
+		
 		CurrencyServiceLayer.addCurrency(currency);
 
-		Assertions.assertEquals(CurrencyServiceLayer.findByName(currency.getName()).getSymbol(), currency.getSymbol());
-
+		
+		Assertions.assertEquals(CurrencyServiceLayer.findByName(currency.getName()).getSymbol(),currency.getSymbol());
+ 
 	}
 	
 	@Test

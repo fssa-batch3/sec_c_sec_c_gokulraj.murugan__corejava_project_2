@@ -2,10 +2,15 @@ sec_c_sec_c_aakash.balamurugan__corejava_project_2
 ## MILESTONE 1
 # ** CURRENCY MODULE**
 Currency Model
+
 Currency Validator
+
 Currency Dao
+
 Currency ServiceLayer
+
 Currency Test cases
+
 ** Currency MODULE FEATURES**
 -Add Currency -Read all Currency -update Currency -Delete Currency
 

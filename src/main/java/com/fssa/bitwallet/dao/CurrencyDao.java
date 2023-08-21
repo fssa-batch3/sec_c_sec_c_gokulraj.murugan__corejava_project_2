@@ -10,8 +10,23 @@ import java.util.List;
 import com.fssa.bitwallet.errors.DaoException;
 import com.fssa.bitwallet.model.Currency;
 
+/**
+ * A Data Access Object (DAO) class for managing Currency data in a database.
+ */
+
+
 public class CurrencyDao {
 
+	
+	/**
+     * Creates a new currency record in the database.
+     *
+     * @param currency The Currency object to be created.
+     * @return true if the currency was created successfully, false otherwise.
+     * @throws SQLException  If a database access error occurs.
+     * @throws DaoException If a DAO specific error occurs.
+     */
+	
 	public static boolean createCurrency(Currency currency) throws SQLException, DaoException {
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
@@ -40,6 +55,13 @@ public class CurrencyDao {
 
 	}
 
+	/**
+     * Retrieves a Currency object from the database by its name.
+     *
+     * @param name The name of the currency to find.
+     * @return The Currency object found in the database, or null if not found.
+     * @throws SQLException If a database access error occurs.
+     */
 	public static Currency findCurrenciesByName(String name) throws SQLException {
 
 		Currency currency = null;
@@ -64,6 +86,14 @@ public class CurrencyDao {
 		return currency;
 	}
 
+	 /**
+     * Maps a ResultSet to a Currency object.
+     *
+     * @param resultSet The ResultSet containing currency data.
+     * @return The Currency object mapped from the ResultSet.
+     * @throws SQLException If a database access error occurs.
+     */
+	
 	public static Currency mapResultSetToCurrency(ResultSet resultSet) throws SQLException {
 		Currency currency = new Currency();
 		currency.setId(resultSet.getInt("id"));
@@ -81,6 +111,15 @@ public class CurrencyDao {
 		return currency;
 	}
 
+	 /**
+     * Deletes a currency record from the database by its name.
+     *
+     * @param name The name of the currency to delete.
+     * @return true if the currency was deleted successfully, false otherwise.
+     * @throws SQLException  If a database access error occurs.
+     * @throws DaoException If a DAO specific error occurs.
+     */
+	
 	public static boolean delete(String name) throws SQLException, DaoException {
 
 		String query = "DELETE FROM currency WHERE name = ?";
@@ -99,7 +138,14 @@ public class CurrencyDao {
 		}
 
 	}
-
+	
+	/**
+     * Retrieves a list of all currencies from the database.
+     *
+     * @return A list of Currency objects representing all currencies in the database.
+     * @throws SQLException If a database access error occurs.
+     */
+	
 	public static List<Currency> readFullList() throws SQLException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
@@ -122,6 +168,17 @@ public class CurrencyDao {
 		}
 	}
 
+	/**
+     * Updates the symbol and rank of a currency record in the database by its name.
+     *
+     * @param name   The name of the currency to update.
+     * @param symbol The new symbol for the currency.
+     * @param rank   The new rank for the currency.
+     * @return true if the currency was updated successfully, false otherwise.
+     * @throws SQLException  If a database access error occurs.
+     * @throws DaoException If a DAO specific error occurs.
+     */
+	
 	public static boolean update(String name, String symbol, int rank) throws SQLException, DaoException {
 
 		try (Connection con = ConnectionUtil.getConnection()) {

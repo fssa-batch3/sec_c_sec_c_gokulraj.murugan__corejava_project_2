@@ -15,17 +15,21 @@ public class ConnectionUtil {
         String url;
         String userName;
         String passWord;
+        
+        url = "jdbc:mysql://localhost:3306/bitwallet";
+        userName = "root";
+        passWord="123456";
  
-        if (System.getenv("CI") != null) {
-            url = System.getenv("DATABASE_HOST");
-            userName = System.getenv("DATABASE_USERNAME");
-            passWord = System.getenv("DATABASE_PASSWORD");
-        } else {
-            Dotenv env = Dotenv.load();
-            url = env.get("DATABASE_HOST");
-            userName = env.get("DATABASE_USERNAME");
-            passWord = env.get("DATABASE_PASSWORD");
-        }
+//        if (System.getenv("CI") != null) {
+//            url = System.getenv("DATABASE_HOST");
+//            userName = System.getenv("DATABASE_USERNAME");
+//            passWord = System.getenv("DATABASE_PASSWORD");
+//        } else {
+//            Dotenv env = Dotenv.load();
+//            url = env.get("DATABASE_HOST");
+//            userName = env.get("DATABASE_USERNAME");
+//            passWord = env.get("DATABASE_PASSWORD");
+//        }
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

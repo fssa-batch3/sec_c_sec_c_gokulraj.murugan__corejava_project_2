@@ -2,6 +2,10 @@ package com.fssa.bitwallet.model;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a Currency entity with various attributes.
+ */
+
 public class Currency {
 
 	private int id;
@@ -21,6 +25,24 @@ public class Currency {
 //		default constructor
 	}
 
+	
+	 /**
+     * Constructs a Currency object with specified attributes.
+     *
+     * @param id           The unique identifier of the currency.
+     * @param name         The name of the currency.
+     * @param symbol       The symbol of the currency.
+     * @param rank         The ranking of the currency.
+     * @param price        The price of the currency.
+     * @param marketCap    The market capitalization of the currency.
+     * @param totalSupply  The total supply of the currency.
+     * @param maximumSupply The maximum supply of the currency.
+     * @param volume24h    The 24-hour trading volume of the currency.
+     * @param allTimeHigh  The all-time high price of the currency.
+     * @param allTimeLow   The all-time low price of the currency.
+     * @param creationDate The creation date of the currency.
+     */
+	
 	public  Currency(int id, String name, String symbol, int rank, double price, double marketCap, double totalSupply,
 			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow,LocalDate creationDate) {
 
@@ -38,6 +60,7 @@ public class Currency {
 		this.creationDate = creationDate;
 	}
 
+	 // Getter and setter methods for each field.
 	public int getId() {
 		return id;
 	}

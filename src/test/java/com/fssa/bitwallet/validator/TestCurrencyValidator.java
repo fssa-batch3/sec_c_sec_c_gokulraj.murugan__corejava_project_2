@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import com.fssa.bitwallet.errors.CurrencyValidatorErrors;
 import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.Currency;
-import com.fssa.bitwallet.validtor.CurrencyValidator;
+import com.fssa.bitwallet.validator.CurrencyValidator;
 
 public class TestCurrencyValidator {
 
+//	Currency cur = new Currency();
 	Currency curr = new Currency(1, "Bitcoin", "BTC", 1, 1.0, 1, 1, 1, 1, 1, 2, LocalDate.of(2005, 3, 4));
+	
 	Currency inValidCurrency = new Currency(-3, null, null, -2, -4, -2, -40, -420, -230, -1, -9,
 			LocalDate.of(2025, 3, 4));
 

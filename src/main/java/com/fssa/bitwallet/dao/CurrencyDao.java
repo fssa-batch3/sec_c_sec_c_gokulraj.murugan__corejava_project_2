@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.fssa.bitwallet.errors.DaoException;
 import com.fssa.bitwallet.model.Currency;
+import com.fssa.bitwallet.util.ConnectionUtil;
 
 /**
  * A Data Access Object (DAO) class for managing Currency data in a database.
@@ -77,7 +78,7 @@ public class CurrencyDao {
 				try (ResultSet resultSet = pst.executeQuery()) {
 
 					if (resultSet.next()) {
-						currency = mapResultSetToCurrency(resultSet);
+						currency = resultSetToCurrency(resultSet);
 					}
 				}
 			}
@@ -94,7 +95,7 @@ public class CurrencyDao {
      * @throws SQLException If a database access error occurs.
      */
 	
-	public static Currency mapResultSetToCurrency(ResultSet resultSet) throws SQLException {
+	public static Currency resultSetToCurrency(ResultSet resultSet) throws SQLException {
 		Currency currency = new Currency();
 		currency.setId(resultSet.getInt("id"));
 		currency.setName(resultSet.getString("name"));
@@ -158,7 +159,7 @@ public class CurrencyDao {
 				try (ResultSet resultSet = pst.executeQuery()) {
 
 					while (resultSet.next()) {
-						Currency currency = mapResultSetToCurrency(resultSet);
+						Currency currency = resultSetToCurrency(resultSet);
 						list.add(currency);
 					}
 				}
@@ -199,5 +200,7 @@ public class CurrencyDao {
 		}
 
 	}
+	
+	
 
 }

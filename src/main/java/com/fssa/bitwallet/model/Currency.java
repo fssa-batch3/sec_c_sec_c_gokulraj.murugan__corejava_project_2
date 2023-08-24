@@ -19,11 +19,10 @@ public class Currency {
 	private double volume24h;
 	private double allTimeHigh;
 	private double allTimeLow;
-	private LocalDate creationDate; 
+	private LocalDate creationDate;
+	private LocalDate modifiedDate;
 	
-	public Currency() {
-//		default constructor
-	}
+
 
 	
 	 /**
@@ -43,10 +42,11 @@ public class Currency {
      * @param creationDate The creation date of the currency.
      */
 	
-	public  Currency(int id, String name, String symbol, int rank, double price, double marketCap, double totalSupply,
+	
+	
+	public  Currency(int id,String name, String symbol, int rank, double price, double marketCap, double totalSupply,
 			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow,LocalDate creationDate) {
 
-		this.id = id;
 		this.name = name;
 		this.symbol = symbol;
 		this.rank = rank;
@@ -58,9 +58,14 @@ public class Currency {
 		this.allTimeHigh = allTimeHigh;
 		this.allTimeLow = allTimeLow;
 		this.creationDate = creationDate;
+		
 	}
 
-	 // Getter and setter methods for each field.
+	 public Currency() {
+		// TODO Auto-generated constructor stub
+	}
+
+	// Getter and setter methods for each field.
 	public int getId() {
 		return id;
 	}
@@ -155,6 +160,14 @@ public class Currency {
 
 	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	public LocalDate getModifiedDate() {
+		return creationDate;
+	}
+
+	public void setModifiedDate(LocalDate modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
 	
 

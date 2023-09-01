@@ -1,17 +1,28 @@
 package com.fssa.bitwallet.validator;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fssa.bitwallet.constants.ValidatorConstants;
 import com.fssa.bitwallet.errors.CurrencyValidatorErrors;
 import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.Currency;
 
+/**
+ * The CurrencyValidator class provides methods for validating Currency objects
+ * and their attributes.
+ */
+
 public class CurrencyValidator {
 
-	// Validate a object
+	/**
+	 * Validates a Currency object.
+	 *
+	 * @param currency The Currency object to validate.
+	 * @return true if the Currency object is valid, otherwise false.
+	 * @throws InvalidInputException    If the Currency object is invalid.
+	 * @throws IllegalArgumentException If invalid arguments are provided.
+	 */
 	public static boolean validate(Currency currency) throws InvalidInputException, IllegalArgumentException {
 
 		if (currency == null) {
@@ -22,16 +33,23 @@ public class CurrencyValidator {
 		validateRank(currency.getRank());
 		validatePrice(currency.getPrice());
 		validateMarketCap(currency.getMarketCap());
-		validateTotalSupply(currency.getTotalSupply());  
+		validateTotalSupply(currency.getTotalSupply());
 		validateMaximumSupply(currency.getMaximumSupply());
 		validateVolume24h(currency.getVolume24h());
 		validateAllTimeHigh(currency.getAllTimeHigh());
 		validateAllTimeLow(currency.getAllTimeLow());
-		validateCreationDate(currency.getCreationDate());
+//		validateCreationDateTime(currency.getCreationDateTime());
 		return true;
 	}
 
-	// Validation for Id
+	/**
+	 * Validates a currency ID.
+	 *
+	 * @param id The currency ID to validate.
+	 * @return true if the ID is valid, otherwise false.
+	 * @throws InvalidInputException    If the ID is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 	public static boolean validateId(int id) throws InvalidInputException, IllegalArgumentException {
 
 		if (id <= 0) {
@@ -40,6 +58,14 @@ public class CurrencyValidator {
 		return true;
 	}
 
+	/**
+	 * Validates a currency name.
+	 *
+	 * @param name The currency name to validate.
+	 * @return true if the name is valid, otherwise false.
+	 * @throws InvalidInputException    If the name is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 	public static boolean validateName(String name) throws InvalidInputException, IllegalArgumentException {
 
 		if (name == null || name.trim().equals("")) {
@@ -57,7 +83,15 @@ public class CurrencyValidator {
 
 		return true;
 	}
- 
+
+	/**
+	 * Validates a currency symbol.
+	 *
+	 * @param symbol The currency symbol to validate.
+	 * @return true if the symbol is valid, otherwise false.
+	 * @throws InvalidInputException    If the symbol is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 	public static boolean validateSymbol(String symbol) throws InvalidInputException, IllegalArgumentException {
 
 		if (symbol == null || symbol.trim().equals("")) {
@@ -76,80 +110,166 @@ public class CurrencyValidator {
 		return true;
 	}
 
-	// Validation for Rank
+	/**
+	 * Validates the rank of a currency.
+	 *
+	 * @param rank The rank to validate.
+	 * @return true if the rank is valid (greater than 0), otherwise false.
+	 * @throws InvalidInputException    If the rank is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
+
 	public static boolean validateRank(int rank) throws InvalidInputException, IllegalArgumentException {
-		if (rank <= ValidatorConstants.constants) {
+		if (rank <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_RANK);
 		}
 		return true;
 	}
 
-	// Validation for Price
+	/**
+	 * Validates the price of a currency.
+	 *
+	 * @param price The price to validate.
+	 * @return true if the price is valid (greater than 0), otherwise false.
+	 * @throws InvalidInputException    If the price is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 	public static boolean validatePrice(double price) throws InvalidInputException, IllegalArgumentException {
 
-		if (price <= ValidatorConstants.constants) {
+		if (price <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_PRICE);
 		}
 		return true;
 	}
 
+	/**
+	 * Validates the market capitalization of a currency.
+	 *
+	 * @param marketCap The market capitalization to validate.
+	 * @return true if the market capitalization is valid (greater than 0),
+	 *         otherwise false.
+	 * @throws InvalidInputException    If the market capitalization is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
+
 	public static boolean validateMarketCap(double marketCap) throws InvalidInputException, IllegalArgumentException {
 
-		if (marketCap <= ValidatorConstants.constants) {
+		if (marketCap <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_MARKET_CAP);
 		}
 		return true;
 	}
 
+	/**
+	 * Validates the total supply of a currency.
+	 *
+	 * @param totalSupply The total supply to validate.
+	 * @return true if the total supply is valid (greater than 0), otherwise false.
+	 * @throws InvalidInputException    If the total supply is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
+
 	public static boolean validateTotalSupply(double totalSupply)
 			throws InvalidInputException, IllegalArgumentException {
 
-		if (totalSupply <= ValidatorConstants.constants) {
+		if (totalSupply <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_TOTAL_SUPPLY);
 		}
 		return true;
 	}
 
+	/**
+	 * Validates the maximum supply of a currency.
+	 *
+	 * @param maximumSupply The maximum supply to validate.
+	 * @return true if the maximum supply is valid (greater than 0), otherwise
+	 *         false.
+	 * @throws InvalidInputException    If the maximum supply is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 	public static boolean validateMaximumSupply(double maximumSupply)
 			throws InvalidInputException, IllegalArgumentException {
 
-		if (maximumSupply <= ValidatorConstants.constants) {
+		if (maximumSupply <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_MAXIMUM_SUPPLY);
 		}
 		return true;
 	}
 
+	/**
+	 * Validates the 24-hour trading volume of a currency.
+	 *
+	 * @param volume24h The 24-hour trading volume to validate.
+	 * @return true if the volume is valid (greater than 0), otherwise false.
+	 * @throws InvalidInputException    If the 24-hour trading volume is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
+
 	public static boolean validateVolume24h(double volume24h) throws InvalidInputException, IllegalArgumentException {
 
-		if (volume24h <= ValidatorConstants.constants) {
+		if (volume24h <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_VOLUME_24H);
 		}
 		return true;
 	}
 
+	/**
+	 * Validates the all-time high price of a currency.
+	 *
+	 * @param allTimeHigh The all-time high price to validate.
+	 * @return true if the all-time high price is valid (greater than 0), otherwise
+	 *         false.
+	 * @throws InvalidInputException    If the all-time high price is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
+
 	public static boolean validateAllTimeHigh(double allTimeHigh)
 			throws InvalidInputException, IllegalArgumentException {
 
-		if (allTimeHigh <= ValidatorConstants.constants) {
+		if (allTimeHigh <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_All_TIME_HIGH);
-		} 
+		}
 		return true;
 	}
 
+	/**
+	 * Validates the all-time low price of a currency.
+	 *
+	 * @param allTimeLow The all-time low price to validate.
+	 * @return true if the all-time low price is valid (greater than 0), otherwise
+	 *         false.
+	 * @throws InvalidInputException    If the all-time low price is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 	public static boolean validateAllTimeLow(double allTimeLow) throws InvalidInputException, IllegalArgumentException {
 
-		if (allTimeLow <= ValidatorConstants.constants) {
+		if (allTimeLow <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_All_TIME_LOW);
 		}
 		return true;
 	}
 
-	public static boolean validateCreationDate(LocalDate date) throws InvalidInputException, IllegalArgumentException {
+	/**
+	 * Validates the creation date of a currency.
+	 *
+	 * @param date The creation date to validate.
+	 * @return true if the date is valid, otherwise false.
+	 * @throws InvalidInputException    If the date is invalid.
+	 * @throws IllegalArgumentException If an invalid argument is provided.
+	 */
 
-		LocalDate today = LocalDate.now();
-		if (date == null) {
+	// Create a DateTimeFormatter to specify the desired format (with seconds)
+
+	// Format the LocalDateTime to a string with the desired format
+
+	public static boolean validateCreationDateTime(LocalDateTime creationDateTime)
+			throws InvalidInputException, IllegalArgumentException {
+
+		LocalDateTime today = LocalDateTime.now();
+
+		if (creationDateTime == null) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_DATE_NULL);
-		} else if (date.isAfter(today)) {
+		} else if (creationDateTime.isAfter(today)) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_DATE_FORMAT);
 		}
 		return true;

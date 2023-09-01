@@ -1,6 +1,7 @@
 package com.fssa.bitwallet.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a Currency entity with various attributes.
@@ -19,33 +20,28 @@ public class Currency {
 	private double volume24h;
 	private double allTimeHigh;
 	private double allTimeLow;
-	private LocalDate creationDate;
-	private LocalDate modifiedDate;
-	
+	private LocalDateTime creationDateTime;
+	private LocalDateTime modifiedDateTime;
 
+	/**
+	 * Constructs a Currency object with specified attributes.
+	 *
+	 * @param id            The unique identifier of the currency.
+	 * @param name          The name of the currency.
+	 * @param symbol        The symbol of the currency.
+	 * @param rank          The ranking of the currency.
+	 * @param price         The price of the currency.
+	 * @param marketCap     The market capitalization of the currency.
+	 * @param totalSupply   The total supply of the currency.
+	 * @param maximumSupply The maximum supply of the currency.
+	 * @param volume24h     The 24-hour trading volume of the currency.
+	 * @param allTimeHigh   The all-time high price of the currency.
+	 * @param allTimeLow    The all-time low price of the currency.
+	 * @param creationDate  The creation date of the currency.
+	 */
 
-	
-	 /**
-     * Constructs a Currency object with specified attributes.
-     *
-     * @param id           The unique identifier of the currency.
-     * @param name         The name of the currency.
-     * @param symbol       The symbol of the currency.
-     * @param rank         The ranking of the currency.
-     * @param price        The price of the currency.
-     * @param marketCap    The market capitalization of the currency.
-     * @param totalSupply  The total supply of the currency.
-     * @param maximumSupply The maximum supply of the currency.
-     * @param volume24h    The 24-hour trading volume of the currency.
-     * @param allTimeHigh  The all-time high price of the currency.
-     * @param allTimeLow   The all-time low price of the currency.
-     * @param creationDate The creation date of the currency.
-     */
-	
-	
-	
-	public  Currency(int id,String name, String symbol, int rank, double price, double marketCap, double totalSupply,
-			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow,LocalDate creationDate) {
+	public Currency( String name, String symbol, int rank, double price, double marketCap, double totalSupply,
+			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow) {
 
 		this.name = name;
 		this.symbol = symbol;
@@ -57,12 +53,38 @@ public class Currency {
 		this.volume24h = volume24h;
 		this.allTimeHigh = allTimeHigh;
 		this.allTimeLow = allTimeLow;
-		this.creationDate = creationDate;
 		
+
 	}
 
-	 public Currency() {
-		// TODO Auto-generated constructor stub
+	public Currency(String name, String symbol, int rank, double price, double marketCap, double totalSupply,
+			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow,
+			LocalDateTime creationDateTime, LocalDateTime modifiedDateTime) {
+
+		this.name = name;
+		this.symbol = symbol;
+		this.rank = rank;
+		this.price = price;
+		this.marketCap = marketCap;
+		this.totalSupply = totalSupply;
+		this.maximumSupply = maximumSupply;
+		this.volume24h = volume24h;
+		this.allTimeHigh = allTimeHigh;
+		this.allTimeLow = allTimeLow;
+		this.creationDateTime = creationDateTime;
+		this.modifiedDateTime = modifiedDateTime;
+
+	}
+
+	public Currency() {
+		//
+	}
+
+	@Override
+	public String toString() {
+
+		return "name" + getName();
+
 	}
 
 	// Getter and setter methods for each field.
@@ -154,21 +176,26 @@ public class Currency {
 		this.allTimeLow = allTimeLow;
 	}
 
-	public LocalDate getCreationDate() {
-		return creationDate;
+	public LocalDateTime getCreationDateTime() {
+		return creationDateTime;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
-	}
-	
-	public LocalDate getModifiedDate() {
-		return creationDate;
+	public void setCreationDateTime(LocalDateTime currentDateTime) {
+		this.creationDateTime = currentDateTime;
 	}
 
-	public void setModifiedDate(LocalDate modifiedDate) {
-		this.modifiedDate = modifiedDate;
+	public LocalDateTime getModifiedDate() {
+		return modifiedDateTime;
 	}
-	
+
+	public void setModifiedDate(LocalDateTime modifiedDateTime) {
+		this.modifiedDateTime = modifiedDateTime;
+	}
+
+	public void setCreationDateTime(LocalDate localDate) {
+		// TODO Auto-generated method stub
+		
+		
+	}
 
 }

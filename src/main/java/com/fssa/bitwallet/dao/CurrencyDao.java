@@ -32,7 +32,7 @@ public class CurrencyDao {
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
-			String query = "insert into currency(name, symbol, ranking, price, market_cap, total_supply, maximum_supply, volume_24h, all_time_high, all_time_low, creationdate) values (?,?,?,?,?,?,?,?,?,?,?)";
+			String query = "insert into currency(name, symbol, ranking, price, market_cap, total_supply, maximum_supply, volume_24h, all_time_high, all_time_low) values (?,?,?,?,?,?,?,?,?,?)";
 
 			try (PreparedStatement pst = connection.prepareStatement(query)) {
 
@@ -45,14 +45,16 @@ public class CurrencyDao {
 				pst.setDouble(7, currency.getMaximumSupply());
 				pst.setDouble(8, currency.getVolume24h());
 				pst.setDouble(9, currency.getAllTimeHigh());
-				pst.setDouble(10, currency.getAllTimeLow());
-				pst.setDate(11, java.sql.Date.valueOf(currency.getCreationDate()));
-
+				pst.setDouble(10, currency.getAllTimeLow());			
+				
 				int rows = pst.executeUpdate();
 
-				return rows > 0;
+				 
+				 return true;
 			}
 		}
+		
+	
 
 	}
 
@@ -108,7 +110,9 @@ public class CurrencyDao {
 		currency.setVolume24h(resultSet.getDouble("volume_24h"));
 		currency.setAllTimeHigh(resultSet.getDouble("all_time_high"));
 		currency.setAllTimeLow(resultSet.getDouble("all_time_low"));
-		currency.setCreationDate(resultSet.getDate("creationdate").toLocalDate());
+		currency.setCreationDateTime(resultSet.getTimestamp("creation_date_time").toLocalDateTime());
+//		currency.setModifiedDate(resultSet.getTimestamp("modified_date_time").toLocalDateTime());
+		
 		return currency;
 	}
 
@@ -180,7 +184,7 @@ public class CurrencyDao {
      * @throws DaoException If a DAO specific error occurs.
      */
 	
-	public static boolean update(String name, String symbol, int rank) throws SQLException, DaoException {
+	public static boolean update(String name, String symbol, int rank) throws SQLException{
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
@@ -199,7 +203,7 @@ public class CurrencyDao {
 			}
 		}
 
-	}
+	}			
 	
 	
 

@@ -14,13 +14,13 @@ public class ConnectionUtil {
 		String userName;
 		String passWord;
 
-//        url = "jdbc:mysql://localhost:3306/bitwallet";
-//        userName = "root";
-//        passWord="123456";
+        url = "jdbc:mysql://localhost:3306/bitwallet";
+        userName = "root";
+        passWord="123456";
 
-		url = System.getenv("DATABASE_HOST");
-		userName = System.getenv("DATABASE_USERNAME");
-		passWord = System.getenv("DATABASE_PASSWORD");
+//		url = System.getenv("DATABASE_HOST");
+//		userName = System.getenv("DATABASE_USERNAME");
+//		passWord = System.getenv("DATABASE_PASSWORD");
 
 //        if (System.getenv("CI") != null) {
 //            url = System.getenv("DATABASE_HOST");

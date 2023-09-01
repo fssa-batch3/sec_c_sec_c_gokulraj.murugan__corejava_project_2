@@ -1,16 +1,15 @@
-
-CREATE TABLE currency(
-	id int auto_increment primary key,
-    name varchar(100) not null unique,
-    symbol varchar(10) not null unique,
-    ranking int not null unique,
-    price double not null,
-    market_cap double not null,
-    total_supply double not null,
-    maximum_supply double not null,
-    volume_24h double not null,
-    all_time_high double not null,
-    all_time_low double not null,
-	creationdate date not null
+CREATE TABLE currency (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    symbol VARCHAR(10) NOT NULL UNIQUE,
+    ranking INT NOT NULL UNIQUE CHECK (ranking > 0),
+    price DOUBLE NOT NULL CHECK (price > 0),
+    market_cap DOUBLE NOT NULL CHECK (market_cap > 0),
+    total_supply DOUBLE NOT NULL CHECK (total_supply > 0),
+    maximum_supply DOUBLE NOT NULL CHECK (maximum_supply > 0),
+    volume_24h DOUBLE NOT NULL CHECK (volume_24h > 0),
+    all_time_high DOUBLE NOT NULL CHECK (all_time_high > 0),
+    all_time_low DOUBLE NOT NULL CHECK (all_time_low > 0),
+    creation_date_time DATETIME NOT NULL,
+    modified_date_time DATETIME
 );
-

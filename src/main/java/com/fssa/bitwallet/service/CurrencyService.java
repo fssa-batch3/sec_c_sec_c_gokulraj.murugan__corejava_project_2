@@ -30,7 +30,7 @@ public class CurrencyService {
      */
 	
 	public static boolean addCurrency(Currency currency)
-			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+			throws IllegalArgumentException, InvalidInputException, SQLException {
 
 		if (CurrencyValidator.validate(currency)) {
 
@@ -53,7 +53,7 @@ public class CurrencyService {
      * @throws DaoException             If a DAO specific error occurs.
      */
 	public static boolean updateCurrency(String name, String symbol, int rank)
-			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+			throws IllegalArgumentException, InvalidInputException, SQLException {
 
 		if (CurrencyValidator.validateName(name) && CurrencyValidator.validateSymbol(symbol)
 				&& CurrencyValidator.validateRank(rank)) {
@@ -75,11 +75,14 @@ public class CurrencyService {
      */
 	
 	
-	public static boolean readCurrency() throws IllegalArgumentException, InvalidInputException, SQLException {
-		printCurrency(CurrencyDao.readFullList());
+	public static List<Currency> readCurrency() throws IllegalArgumentException, SQLException {
+		
+		
+		
+		
+		return CurrencyDao.readFullList();
 
-		return true;
-
+		
 	}
 
 	/**
@@ -94,7 +97,7 @@ public class CurrencyService {
      */
 	
 	public static boolean deleteCurrency(String name)
-			throws IllegalArgumentException, InvalidInputException, SQLException, DaoException {
+			throws IllegalArgumentException, InvalidInputException, SQLException {
 
 		if (CurrencyValidator.validateName(name)) {
 			CurrencyDao.delete(name);

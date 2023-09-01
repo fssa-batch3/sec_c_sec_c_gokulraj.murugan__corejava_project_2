@@ -16,7 +16,7 @@
 		<sonar.projectKey>
 			fssa-batch3_sec_c_sec_c_gokulraj.murugan__corejava_project_2</sonar.projectKey>
 		<sonar.organization>fssa-batch3</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>	
 	</properties>
 
 

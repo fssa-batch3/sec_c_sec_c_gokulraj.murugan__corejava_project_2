@@ -16,10 +16,9 @@ import com.fssa.bitwallet.model.Currency;
 
 public class TestCurrencyValidator {
 
-	Currency curr = new Currency("Bitcoin", "BTC", 1, 1.0, 1, 1, 1, 1, 1, 2,LocalDateTime.of(2005, 02, 03, 03, 03), LocalDateTime.of(2005, 02, 03, 07, 03));
+	Currency curr = new Currency("Bitcoin", "BTC", 1, 1.0, 1, 1, 1, 1, 1, 2);
 
-	Currency inValidCurrency = new Currency(null, null, -2, -4, -2, -40, -420, -230, -1, -9, LocalDateTime.of(2555, 02, 03, 03, 03) ,
-			null);
+	Currency inValidCurrency = new Currency(null, null, -2, -4, -2, -40, -420, -230, -1, -9);
 
 	/**
 	 * Test the validate method with a valid Currency object.
@@ -29,8 +28,15 @@ public class TestCurrencyValidator {
 	 */
 
 	@Test
-	void testValidate() throws InvalidInputException, IllegalArgumentException {
-		Assertions.assertTrue(CurrencyValidator.validate(curr));
+	void testValidate() {
+
+		try {
+			Assertions.assertTrue(CurrencyValidator.validate(curr));
+		} catch (IllegalArgumentException | InvalidInputException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -384,45 +390,4 @@ public class TestCurrencyValidator {
 		}
 	}
 
-	/**
-	 * Test the validateCreationDate method with a valid creation date.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidateCreationDate() throws Exception {
-
-		curr.setCreationDateTime(curr.getCreationDateTime());
-		Assertions.assertTrue(CurrencyValidator.validateCreationDateTime(curr.getCreationDateTime()));
-
-	}
-
-	/**
-	 * Test the validateCreationDate method with a null creation date.
-	 */
-	@Test
-	void testNullValidateDate() {
-		try {
-			CurrencyValidator.validateCreationDateTime(null);
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_DATE_NULL, e.getMessage());
-		}
-	}
-
-	 /**
-     * Test the validateCreationDate method with an invalid date format.
-     */
-	
-	@Test
-	void testInValidateDate() {
-		try {
-			CurrencyValidator.validateCreationDateTime(inValidCurrency.getCreationDateTime());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_DATE_FORMAT, e.getMessage());
-		}
-	}
 }

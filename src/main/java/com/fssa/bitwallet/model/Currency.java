@@ -1,6 +1,5 @@
 package com.fssa.bitwallet.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -40,7 +39,7 @@ public class Currency {
 	 * @param creationDate  The creation date of the currency.
 	 */
 
-	public Currency( String name, String symbol, int rank, double price, double marketCap, double totalSupply,
+	public Currency(String name, String symbol, int rank, double price, double marketCap, double totalSupply,
 			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow) {
 
 		this.name = name;
@@ -53,38 +52,11 @@ public class Currency {
 		this.volume24h = volume24h;
 		this.allTimeHigh = allTimeHigh;
 		this.allTimeLow = allTimeLow;
-		
-
-	}
-
-	public Currency(String name, String symbol, int rank, double price, double marketCap, double totalSupply,
-			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow,
-			LocalDateTime creationDateTime, LocalDateTime modifiedDateTime) {
-
-		this.name = name;
-		this.symbol = symbol;
-		this.rank = rank;
-		this.price = price;
-		this.marketCap = marketCap;
-		this.totalSupply = totalSupply;
-		this.maximumSupply = maximumSupply;
-		this.volume24h = volume24h;
-		this.allTimeHigh = allTimeHigh;
-		this.allTimeLow = allTimeLow;
-		this.creationDateTime = creationDateTime;
-		this.modifiedDateTime = modifiedDateTime;
 
 	}
 
 	public Currency() {
 		//
-	}
-
-	@Override
-	public String toString() {
-
-		return "name" + getName();
-
 	}
 
 	// Getter and setter methods for each field.
@@ -180,22 +152,8 @@ public class Currency {
 		return creationDateTime;
 	}
 
-	public void setCreationDateTime(LocalDateTime currentDateTime) {
-		this.creationDateTime = currentDateTime;
-	}
-
 	public LocalDateTime getModifiedDate() {
 		return modifiedDateTime;
-	}
-
-	public void setModifiedDate(LocalDateTime modifiedDateTime) {
-		this.modifiedDateTime = modifiedDateTime;
-	}
-
-	public void setCreationDateTime(LocalDate localDate) {
-		// TODO Auto-generated method stub
-		
-		
 	}
 
 }

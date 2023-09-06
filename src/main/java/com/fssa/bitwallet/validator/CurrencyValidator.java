@@ -1,6 +1,5 @@
 package com.fssa.bitwallet.validator;
 
-import java.time.LocalDateTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,7 +37,7 @@ public class CurrencyValidator {
 		validateVolume24h(currency.getVolume24h());
 		validateAllTimeHigh(currency.getAllTimeHigh());
 		validateAllTimeLow(currency.getAllTimeLow());
-//		validateCreationDateTime(currency.getCreationDateTime());
+
 		return true;
 	}
 
@@ -245,32 +244,6 @@ public class CurrencyValidator {
 
 		if (allTimeLow <= 0) {
 			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_All_TIME_LOW);
-		}
-		return true;
-	}
-
-	/**
-	 * Validates the creation date of a currency.
-	 *
-	 * @param date The creation date to validate.
-	 * @return true if the date is valid, otherwise false.
-	 * @throws InvalidInputException    If the date is invalid.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	// Create a DateTimeFormatter to specify the desired format (with seconds)
-
-	// Format the LocalDateTime to a string with the desired format
-
-	public static boolean validateCreationDateTime(LocalDateTime creationDateTime)
-			throws InvalidInputException, IllegalArgumentException {
-
-		LocalDateTime today = LocalDateTime.now();
-
-		if (creationDateTime == null) {
-			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_DATE_NULL);
-		} else if (creationDateTime.isAfter(today)) {
-			throw new InvalidInputException(CurrencyValidatorErrors.INVALID_DATE_FORMAT);
 		}
 		return true;
 	}

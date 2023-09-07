@@ -91,6 +91,32 @@ public class CurrencyDao {
 		return currency;
 	}
 
+	public static Currency findCurrencyById(int id) throws DaoException {
+
+		Currency currency = null;
+
+		try (Connection connection = ConnectionUtil.getConnection()) {
+
+			String query = "SELECT * FROM currency WHERE id = ?";
+
+			try (PreparedStatement pst = connection.prepareStatement(query)) {
+
+				pst.setInt(1, id);
+
+				try (ResultSet resultSet = pst.executeQuery()) {
+
+					if (resultSet.next()) {
+						currency = resultSetToCurrency(resultSet);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			throw new DaoException(e.getMessage());
+		}
+
+		return currency;
+	}
+
 	/**
 	 * Maps a ResultSet to a Currency object.
 	 *

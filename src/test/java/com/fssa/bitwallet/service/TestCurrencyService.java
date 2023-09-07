@@ -133,7 +133,7 @@ public class TestCurrencyService {
 		try {
 			Assertions.assertNotNull(CurrencyService.readCurrency());
 
-		} catch (InvalidInputException | DaoException e) {
+		} catch (DaoException e) {
 
 			e.printStackTrace();
 		}

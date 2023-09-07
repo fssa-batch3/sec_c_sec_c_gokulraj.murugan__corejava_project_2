@@ -67,7 +67,7 @@ public class CurrencyService {
 	 * @throws SQLException             If a database access error occurs.
 	 */
 
-	public static List<Currency> readCurrency() throws InvalidInputException, DaoException {
+	public static List<Currency> readCurrency() throws DaoException {
 
 		return CurrencyDao.readFullList();
 
@@ -107,6 +107,16 @@ public class CurrencyService {
 		Currency cuu = null;
 		if (CurrencyValidator.validateName(name)) {
 			cuu = CurrencyDao.findCurrenciesByName(name);
+		}
+		return cuu;
+
+	}
+
+	public static Currency findById(int id) throws InvalidInputException, DaoException {
+
+		Currency cuu = null;
+		if (CurrencyValidator.validateId(id)) {
+			cuu = CurrencyDao.findCurrencyById(id);
 		}
 		return cuu;
 

@@ -236,6 +236,8 @@ public class CurrencyDao {
 		}
 
 	}
+	
+
 
 	public static boolean update(Currency currency) throws DaoException {
 

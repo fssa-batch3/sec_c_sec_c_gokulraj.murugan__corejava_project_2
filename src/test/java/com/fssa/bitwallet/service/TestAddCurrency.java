@@ -49,7 +49,7 @@ public class TestAddCurrency {
 			e.printStackTrace();
 		}
 	}
-
+ 
 	@Test
 	void testAddCurrency4() {
 

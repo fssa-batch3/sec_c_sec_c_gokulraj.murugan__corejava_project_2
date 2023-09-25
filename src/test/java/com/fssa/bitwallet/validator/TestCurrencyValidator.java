@@ -1,7 +1,5 @@
 package com.fssa.bitwallet.validator;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +14,9 @@ import com.fssa.bitwallet.model.Currency;
 
 public class TestCurrencyValidator {
 
-	Currency curr = new Currency("Bitcoin", "BTC", 1, 1.0, 1, 1, 1, 1, 1, 2);
+	Currency curr = new Currency("Bitcoin", "BTC", "https://freeimage.host/i/JHmJBWX");
 
-	Currency inValidCurrency = new Currency(null, null, -2, -4, -2, -40, -420, -230, -1, -9);
+	Currency inValidCurrency = new Currency(null, null, null);
 
 	/**
 	 * Test the validate method with a valid Currency object.
@@ -55,24 +53,6 @@ public class TestCurrencyValidator {
 		}
 	}
 
-	/**
-	 * Test the validateId method with a valid ID.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-	@Test
-	void testValidateId() throws Exception {
-
-		curr.setId(2);
-		Assertions.assertTrue(CurrencyValidator.validateId(curr.getId()));
-
-	}
-
-	/**
-	 * Test the validateId method with a negative ID.
-	 */
-
 	@Test
 	void testNegativeValidatId() {
 		try {
@@ -82,230 +62,6 @@ public class TestCurrencyValidator {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_ID, e.getMessage());
 		}
 
-	}
-
-	/**
-	 * Test the validateRank method with a valid rank.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-	@Test
-	void testValidateRank() throws Exception {
-
-		curr.setRank(curr.getRank());
-		Assertions.assertTrue(CurrencyValidator.validateRank(curr.getRank()));
-
-	}
-
-	/**
-	 * Test the validateRank method with a negative rank.
-	 */
-	@Test
-	void testNegativeValidatRank() {
-		try {
-			CurrencyValidator.validateRank(inValidCurrency.getRank());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_RANK, e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Test the validatePrice method with a valid price.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidatePrice() throws Exception {
-
-		curr.setPrice(curr.getPrice());
-		Assertions.assertTrue(CurrencyValidator.validatePrice(curr.getPrice()));
-	}
-
-	/**
-	 * Test the validatePrice method with a negative price.
-	 */
-	@Test
-	void testNegativeValidatPrice() {
-		try {
-			CurrencyValidator.validatePrice(inValidCurrency.getPrice());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_PRICE, e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Test the validateMarketCap method with a valid market cap.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidateMarketCap() throws Exception {
-
-		curr.setMarketCap(curr.getMarketCap());
-		Assertions.assertTrue(CurrencyValidator.validateMarketCap(curr.getMarketCap()));
-	}
-
-	/**
-	 * Test the validateMarketCap method with a negative market cap.
-	 */
-	@Test
-	void testNegativeValidatMarketCap() {
-		try {
-			CurrencyValidator.validateMarketCap(inValidCurrency.getMarketCap());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_MARKET_CAP, e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Test the validateTotalSupply method with a valid total supply.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidateTotalSupply() throws Exception {
-
-		curr.setTotalSupply(curr.getTotalSupply());
-		Assertions.assertTrue(CurrencyValidator.validateTotalSupply(curr.getTotalSupply()));
-	}
-
-	/**
-	 * Test the validateTotalSupply method with a negative total supply.
-	 */
-	@Test
-	void testNegativeValidateTotalSupply() {
-		try {
-			CurrencyValidator.validateTotalSupply(inValidCurrency.getTotalSupply());
-
-			Assertions.fail("Test case failed");
-
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_TOTAL_SUPPLY, e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Test the validateMaximumSupply method with a valid maximum supply.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidateMaximumSupply() throws Exception {
-
-		curr.setMaximumSupply(curr.getMaximumSupply());
-		Assertions.assertTrue(CurrencyValidator.validateMaximumSupply(curr.getMaximumSupply()));
-	}
-
-	/**
-	 * Test the validateMaximumSupply method with a negative maximum supply.
-	 */
-	@Test
-	void testNegativeValidatMaximumSupply() {
-		try {
-			CurrencyValidator.validateMaximumSupply(inValidCurrency.getMaximumSupply());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_MAXIMUM_SUPPLY, e.getMessage());
-		}
-
-	}
-
-	/**
-	 * Test the validateVolume24h method with a valid 24-hour trading volume.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidateVolume24h() throws Exception {
-
-		curr.setVolume24h(curr.getVolume24h());
-		Assertions.assertTrue(CurrencyValidator.validateVolume24h(curr.getVolume24h()));
-	}
-
-	/**
-	 * Test the validateVolume24h method with a negative 24-hour trading volume.
-	 */
-	@Test
-	void testNegativeValidateVolume24h() {
-		try {
-			CurrencyValidator.validateVolume24h(inValidCurrency.getVolume24h());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_VOLUME_24H, e.getMessage());
-		}
-	}
-
-	/**
-	 * Test the validateAllTimeHigh method with a valid all-time high price.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-	@Test
-	void testValidateAllTimeHigh() throws Exception {
-
-		curr.setAllTimeHigh(curr.getAllTimeHigh());
-		Assertions.assertTrue(CurrencyValidator.validateAllTimeHigh(curr.getAllTimeHigh()));
-	}
-
-	/**
-	 * Test the validateAllTimeHigh method with a negative all-time high price.
-	 */
-
-	@Test
-	void testNegativeValidateAllTimeHigh() {
-		try {
-			CurrencyValidator.validateAllTimeHigh(inValidCurrency.getAllTimeHigh());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_All_TIME_HIGH, e.getMessage());
-		}
-	}
-
-	/**
-	 * Test the validateAllTimeLow method with a valid all-time low price.
-	 *
-	 * @throws InvalidInputException    If the validation fails.
-	 * @throws IllegalArgumentException If an invalid argument is provided.
-	 */
-
-	@Test
-	void testValidateAllTimeLow() throws Exception {
-
-		curr.setAllTimeLow(curr.getAllTimeLow());
-		Assertions.assertTrue(CurrencyValidator.validateAllTimeLow(curr.getAllTimeLow()));
-	}
-
-	/**
-	 * Test the validateAllTimeLow method with a negative all-time low price.
-	 */
-	@Test
-	void testNegativeValidateAllTimeLow() {
-		try {
-
-			CurrencyValidator.validateAllTimeLow(inValidCurrency.getAllTimeLow());
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_All_TIME_LOW, e.getMessage());
-		}
 	}
 
 	/**
@@ -389,5 +145,30 @@ public class TestCurrencyValidator {
 			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_SYMBOL_PATTERN, e.getMessage());
 		}
 	}
+
+	@Test
+	void testValidProductImageURLNull() {
+
+		try {
+			CurrencyValidator.isValidateProductImageLink(null);
+			Assertions.fail("Test Invalid Product Image URL Method Is Failded");
+		} catch (InvalidInputException e) {
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_LOGO_NULL, e.getMessage());
+		}
+
+	}
+
+	@Test
+	void testValidProductImageURL() {
+
+		try {
+			CurrencyValidator.isValidateProductImageLink(curr.getLogo());
+			Assertions.fail("Test Invalid Product Image URL Method Is Failded");
+		} catch (InvalidInputException e) {
+			Assertions.assertEquals(CurrencyValidatorErrors.INVALID_LOGO_NULL, e.getMessage());
+		}
+
+	}
+
 
 }

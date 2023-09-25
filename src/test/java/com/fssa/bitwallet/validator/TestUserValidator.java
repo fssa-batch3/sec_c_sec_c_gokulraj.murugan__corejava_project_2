@@ -8,20 +8,19 @@ import org.junit.jupiter.api.Test;
 import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.errors.UserValidatorError;
 import com.fssa.bitwallet.model.User;
-import com.fssa.bitwallet.model.UserRole;
 
 public class TestUserValidator {
 
 	public static User getValidUser() {
 
-		User user = new User("Gokulraj", "gokul@gmail.com", "Luffy@123", UserRole.ADMIN, LocalDate.of(2005, 04, 06));
+		User user = new User("Gokulraj", "gokul@gmail.com", "Luffy@123",  LocalDate.of(2005, 04, 06));
 
 		return user;
 	}
 
 	public static User getInvalidUser() {
 
-		User user = new User("Go*#&*aj", "gokulgmail", "dfuffy123", null, LocalDate.of(2025, 04, 06));
+		User user = new User("Go*#&*aj", "gokulgmail", "dfuffy123",  LocalDate.of(2025, 04, 06));
 
 		return user;
 	}
@@ -118,27 +117,7 @@ public class TestUserValidator {
 			Assertions.assertEquals(UserValidatorError.INVALID_PASSWORD_PATTERN, e.getMessage());
 		}
 	}
-
-	@Test
-	void testValidateUserRole() {
-
-		try {
-			Assertions.assertTrue(UserValidator.validateUserRole(getValidUser().getRole()));
-		} catch (IllegalArgumentException | InvalidInputException e) {
-
-			e.printStackTrace();
-		}
-	}
-
-	@Test
-	void testNullValidateUserRole() {
-		try {
-			UserValidator.validateUserRole(null);
-			Assertions.fail("Test case failed");
-		} catch (InvalidInputException e) {
-			Assertions.assertEquals(UserValidatorError.INVALID_USERROLE_NULL, e.getMessage());
-		}
-	}
+	
 
 	@Test
 	void testValidateDOB() throws Exception {

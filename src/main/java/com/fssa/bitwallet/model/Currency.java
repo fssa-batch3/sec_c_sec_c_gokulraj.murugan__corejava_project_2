@@ -11,14 +11,7 @@ public class Currency {
 	private int id;
 	private String name;
 	private String symbol;
-	private int rank;
-	private double price;
-	private double marketCap;
-	private double totalSupply;
-	private double maximumSupply;
-	private double volume24h;
-	private double allTimeHigh;
-	private double allTimeLow;
+	private String logo;
 	private LocalDateTime creationDateTime;
 	private LocalDateTime modifiedDateTime;
 
@@ -39,19 +32,21 @@ public class Currency {
 	 * @param creationDate  The creation date of the currency.
 	 */
 
-	public Currency(String name, String symbol, int rank, double price, double marketCap, double totalSupply,
-			double maximumSupply, double volume24h, double allTimeHigh, double allTimeLow) {
+	public Currency(int id ,String name, String symbol,String logo) {
+
+		this.id = id;
+		this.name = name;
+		this.symbol = symbol;
+		this.logo = logo;
+
+	}
+	
+	
+	public Currency(String name, String symbol,String logo) {
 
 		this.name = name;
 		this.symbol = symbol;
-		this.rank = rank;
-		this.price = price;
-		this.marketCap = marketCap;
-		this.totalSupply = totalSupply;
-		this.maximumSupply = maximumSupply;
-		this.volume24h = volume24h;
-		this.allTimeHigh = allTimeHigh;
-		this.allTimeLow = allTimeLow;
+		this.logo = logo;
 
 	}
 
@@ -83,69 +78,13 @@ public class Currency {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-
-	public int getRank() {
-		return rank;
+	
+	public String getLogo() {
+		return logo;
 	}
 
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public double getMarketCap() {
-		return marketCap;
-	}
-
-	public void setMarketCap(double marketCap) {
-		this.marketCap = marketCap;
-	}
-
-	public double getTotalSupply() {
-		return totalSupply;
-	}
-
-	public void setTotalSupply(double totalSupply) {
-		this.totalSupply = totalSupply;
-	}
-
-	public double getMaximumSupply() {
-		return maximumSupply;
-	}
-
-	public void setMaximumSupply(double maximumSupply) {
-		this.maximumSupply = maximumSupply;
-	}
-
-	public double getVolume24h() {
-		return volume24h;
-	}
-
-	public void setVolume24h(double volume24h) {
-		this.volume24h = volume24h;
-	}
-
-	public double getAllTimeHigh() {
-		return allTimeHigh;
-	}
-
-	public void setAllTimeHigh(double allTimeHigh) {
-		this.allTimeHigh = allTimeHigh;
-	}
-
-	public double getAllTimeLow() {
-		return allTimeLow;
-	}
-
-	public void setAllTimeLow(double allTimeLow) {
-		this.allTimeLow = allTimeLow;
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 
 	public LocalDateTime getCreationDateTime() {

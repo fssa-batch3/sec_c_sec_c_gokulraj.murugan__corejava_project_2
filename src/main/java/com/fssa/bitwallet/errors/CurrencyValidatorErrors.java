@@ -89,4 +89,7 @@ public interface CurrencyValidatorErrors {
      * Error message indicating that a creation date is in the future.
      */
     public static final String INVALID_DATE_FORMAT = "Creation Date can't be in the future";
+    
+    
+    public static final String  INVALID_LOGO_NULL = "Url can't be null or empty";
 }

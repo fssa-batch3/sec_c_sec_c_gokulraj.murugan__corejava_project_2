@@ -30,20 +30,13 @@ public class CurrencyDao {
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
-			String query = "insert into currency(name, symbol, ranking, price, market_cap, total_supply, maximum_supply, volume_24h, all_time_high, all_time_low) values (?,?,?,?,?,?,?,?,?,?)";
+			String query = "insert into currencies(name, symbol, logo) values (?,?,?)";
 
 			try (PreparedStatement pst = connection.prepareStatement(query)) {
 
 				pst.setString(1, currency.getName());
 				pst.setString(2, currency.getSymbol());
-				pst.setInt(3, currency.getRank());
-				pst.setDouble(4, currency.getPrice());
-				pst.setDouble(5, currency.getMarketCap());
-				pst.setDouble(6, currency.getTotalSupply());
-				pst.setDouble(7, currency.getMaximumSupply());
-				pst.setDouble(8, currency.getVolume24h());
-				pst.setDouble(9, currency.getAllTimeHigh());
-				pst.setDouble(10, currency.getAllTimeLow());
+				pst.setString(3, currency.getLogo());
 
 				int rows = pst.executeUpdate();
 
@@ -71,7 +64,7 @@ public class CurrencyDao {
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
-			String query = "SELECT * FROM currency WHERE id = ?";
+			String query = "SELECT currencies.name,currencies.symbol,currencies.logo FROM currencies WHERE id = ?";
 
 			try (PreparedStatement pst = connection.prepareStatement(query)) {
 
@@ -97,7 +90,7 @@ public class CurrencyDao {
 
 		try (Connection connection = ConnectionUtil.getConnection()) {
 
-			String query = "SELECT * FROM currency WHERE id = ?";
+			String query = "SELECT * FROM currencies WHERE id = ?";
 
 			try (PreparedStatement pst = connection.prepareStatement(query)) {
 
@@ -130,14 +123,7 @@ public class CurrencyDao {
 		currency.setId(resultSet.getInt("id"));
 		currency.setName(resultSet.getString("name"));
 		currency.setSymbol(resultSet.getString("symbol"));
-		currency.setRank(resultSet.getInt("ranking"));
-		currency.setPrice(resultSet.getDouble("price"));
-		currency.setMarketCap(resultSet.getDouble("market_cap"));
-		currency.setTotalSupply(resultSet.getDouble("total_supply"));
-		currency.setMaximumSupply(resultSet.getDouble("maximum_supply"));
-		currency.setVolume24h(resultSet.getDouble("volume_24h"));
-		currency.setAllTimeHigh(resultSet.getDouble("all_time_high"));
-		currency.setAllTimeLow(resultSet.getDouble("all_time_low"));
+		currency.setLogo(resultSet.getString("logo"));
 		return currency;
 	}
 
@@ -152,7 +138,7 @@ public class CurrencyDao {
 
 	public static boolean delete(int id) throws DaoException {
 
-		String query = "DELETE FROM currency WHERE id = ?";
+		String query = "DELETE FROM currencies WHERE id = ?";
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
@@ -184,7 +170,7 @@ public class CurrencyDao {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String query = "SELECT * FROM currency;";
+			String query = "SELECT * FROM currencies;";
 			ArrayList<Currency> list = new ArrayList<>();
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -217,9 +203,9 @@ public class CurrencyDao {
 
 	public static int getIdByName(String name) throws DaoException {
 		int id = 0;
-		String queryDeleteEvents = "SELECT id FROM currency WHERE name = ? ";
+		String query = "SELECT id FROM currencies WHERE name = ? ";
 		try (Connection con = ConnectionUtil.getConnection()) {
-			try (PreparedStatement pst = con.prepareStatement(queryDeleteEvents)) {
+			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				pst.setString(1, name);
 
@@ -245,20 +231,13 @@ public class CurrencyDao {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String query = "update currency SET name = ?,symbol = ?,ranking = ?, price = ?, market_cap = ?, total_supply = ?,maximum_supply = ?, volume_24h =?,all_time_high = ?,all_time_low = ? Where id = ?";
+			String query = "update currencies SET name = ?,symbol = ? Where id = ?";
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				pst.setString(1, currency.getName());
 				pst.setString(2, currency.getSymbol());
-				pst.setInt(3, currency.getRank());
-				pst.setDouble(4, currency.getPrice());
-				pst.setDouble(5, currency.getMarketCap());
-				pst.setDouble(6, currency.getTotalSupply());
-				pst.setDouble(7, currency.getMaximumSupply());
-				pst.setDouble(8, currency.getVolume24h());
-				pst.setDouble(9, currency.getAllTimeHigh());
-				pst.setDouble(10, currency.getAllTimeLow());
+			
 				pst.setInt(11, id);
 
 				int rows = pst.executeUpdate();

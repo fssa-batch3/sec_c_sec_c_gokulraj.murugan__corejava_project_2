@@ -8,13 +8,12 @@ import org.junit.jupiter.api.Test;
 import com.fssa.bitwallet.errors.DaoException;
 import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.User;
-import com.fssa.bitwallet.model.UserRole;
 
 public class TestUserService {
 
-	User validUser = new User("gokul", "gokul@gmail.com", "Luffy@123", UserRole.USER, LocalDate.of(2005, 04, 05));
-	User updateUser = new User("gokulraj", "gokul@gmail.com", "Luffy@123", UserRole.USER, LocalDate.of(2005, 04, 06));
-	User deleteUser = new User("gokul", "gokul@gmail.com", "Luffy@123", UserRole.USER, LocalDate.of(2005, 04, 05));
+	User validUser = new User("gokul", "gokul@gmail.com", "Luffy@123",LocalDate.of(2005, 04, 05));
+	User updateUser = new User("gokulraj", "gokul@gmail.com", "Luffy@123", LocalDate.of(2005, 04, 06));
+	User deleteUser = new User("gokul", "gokul@gmail.com", "Luffy@123", LocalDate.of(2005, 04, 05));
 
 	@Test
 	void testAddUser() {
@@ -54,7 +53,7 @@ public class TestUserService {
 	void testGetUserById() {
 
 		try {
-			Assertions.assertTrue(UserService.getUserbyId(1));
+			Assertions.assertEquals(UserService.getUserbyEmail(validUser.getEmail()).getUsername(),validUser.getUsername());
 		} catch (InvalidInputException | DaoException e) {
 			e.printStackTrace();
 		}

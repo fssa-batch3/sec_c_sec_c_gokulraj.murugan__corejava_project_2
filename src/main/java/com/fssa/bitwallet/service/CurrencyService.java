@@ -121,5 +121,14 @@ public class CurrencyService {
 		return cuu;
 
 	}
+	
+	public static int findIdByName(String name)throws InvalidInputException, DaoException{
+		
+		if(CurrencyValidator.validateName(name)) {
+			
+			return CurrencyDao.getIdByName(name);
+		}
+		return 0;
+	}
 
 }

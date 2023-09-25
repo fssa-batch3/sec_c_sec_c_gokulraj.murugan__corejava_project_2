@@ -26,12 +26,12 @@ public class TestCurrencyService {
 	 */
 	public static Currency getValidCurrency() {
 
-		Currency currency = new Currency("Tether", "TRC", 38, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0);
+		Currency currency = new Currency("Tether", "TRC","https://freeimage.host/i/JHmJBWX");
 		return currency;
 	}
 
 	public static Currency getUpdateCurrency() {
-		Currency currency = new Currency("Tether", "ETH", 38, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0);
+		Currency currency = new Currency("Tether", "ETH","https://freeimage.host/i/JHmJBWX");
 		return currency;
 
 	}

@@ -8,14 +8,12 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private UserRole role;
 	private LocalDate dateOfBirth;
 
-	public User(String username, String email, String password, UserRole role, LocalDate dOB) {
+	public User(String username, String email, String password, LocalDate dOB) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.role = role;
 		dateOfBirth = dOB;
 	}
 
@@ -54,13 +52,7 @@ public class User {
 		this.password = password;
 	}
 
-	public UserRole getRole() {
-		return role;
-	}
 
-	public void setRole(UserRole role) {
-		this.role = role;
-	}
 
 	public LocalDate getDOB() {
 		return dateOfBirth;

@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.errors.UserValidatorError;
 import com.fssa.bitwallet.model.User;
-import com.fssa.bitwallet.model.UserRole;
 
 public class UserValidator {
 
@@ -18,10 +17,9 @@ public class UserValidator {
 		}
 
 		validateName(user.getUsername());
-		validateEmail(user.getEmail());
-		validateUserRole(user.getRole());
+	validateEmail(user.getEmail());
 		validatePassword(user.getPassword());
-		validateUserRole(user.getRole());
+
 		validateDOB(user.getDOB());
 
 		return true;
@@ -70,15 +68,6 @@ public class UserValidator {
 
 		return true;
 	}
-
-	public static boolean validateUserRole(UserRole userRole) throws InvalidInputException {
-
-		if (userRole == null) {
-			throw new InvalidInputException(UserValidatorError.INVALID_USERROLE_NULL);
-		}
-		return true;
-	}
-
 	public static boolean validatePassword(String password) throws InvalidInputException {
 
 		if (password == null || password.isEmpty()) {

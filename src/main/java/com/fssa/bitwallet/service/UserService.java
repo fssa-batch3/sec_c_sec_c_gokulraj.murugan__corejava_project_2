@@ -28,6 +28,17 @@ public class UserService {
 		}
 		return true;
 	}
+	
+	
+	public static int getIdByEmail(String email) throws InvalidInputException, DaoException {
+
+		if (UserValidator.validateEmail(email)) {
+
+			return UserDAO.getIdByEmail(email);
+
+		}
+		 return 0;
+	}
 
 	public static boolean deleteUser(User user) throws InvalidInputException, DaoException {
 
@@ -39,19 +50,42 @@ public class UserService {
 		return true;
 	}
 
-	public static boolean getUserbyId(int id) throws InvalidInputException, DaoException {
+	public static User getUserbyEmail(String email) throws InvalidInputException, DaoException {
 
-		if (UserValidator.validateId(id)) {
+		User user = null;
+		
+		if (UserValidator.validateEmail(email)) {
 
-			User user  = UserDAO.getUserById(id);
+			user = UserDAO.getUserByEmail(email);
 			printUser(user);
+		}
+		return user;
+	}
+	
+
+	
+	public static boolean checkMailAvailable(String email) throws InvalidInputException, DaoException {
+		
+		if(UserValidator.validateEmail(email)) {
+			
+			return UserDAO.checkMailAvailable(email);
+			
+		}
+		return true;
+	}
+	
+	public static boolean checkMailAndPassword(String email,String password) throws InvalidInputException, DaoException {
+		
+		if(UserValidator.validateEmail(email) && UserValidator.validatePassword(password)) {
+			
+			return UserDAO.checkMailAndPassword(email,password);
 		}
 		return true;
 	}
 	
 	public static void printUser(User user) {
 		
-		Logger.info("UserName :" + user.getUsername());
+//		Logger.info("UserName :" + user.getUsername());
 		Logger.info("Id :" + user.getId());
 		Logger.info("Email :"+user.getEmail());
 		Logger.info("DOB :"+user.getDOB());

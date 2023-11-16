@@ -1,6 +1,6 @@
 package com.fssa.bitwallet.service;
 
-import java.util.List;
+import java.util.List; 
 
 import com.fssa.bitwallet.dao.TransactionDAO;
 import com.fssa.bitwallet.errors.DaoException;

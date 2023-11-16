@@ -8,7 +8,7 @@ import com.fssa.bitwallet.errors.InvalidInputException;
 import com.fssa.bitwallet.model.Balance;
 
 public class TestBalanceService {
-
+   
 	public static Balance getValidBalance() {
 		
 		Balance balance = new Balance(2,3,3);

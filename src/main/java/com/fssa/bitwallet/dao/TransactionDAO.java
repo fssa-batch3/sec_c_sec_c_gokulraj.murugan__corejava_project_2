@@ -47,6 +47,7 @@ public class TransactionDAO {
 		trans.setQuantity(resultSet.getDouble("quantity"));
 		trans.setSellerId(resultSet.getInt("seller_id"));
 		trans.setTransactionTime(resultSet.getDate("transaction_time").toLocalDate());
+		trans.setTransactionMethod(resultSet.getString("transaction_method"));
 		return trans;
 	}
 	
@@ -56,7 +57,7 @@ public class TransactionDAO {
 
 		try (Connection con = ConnectionUtil.getConnection()) {
 
-			String query = "SELECT transactions.transaction_type,transactions.amount,transactions.quantity,transactions.currency_id,transactions.seller_id,transaction_time  FROM transactions where user_id = ?;";
+			String query = "SELECT transactions.transaction_type,transactions.amount,transactions.quantity,transactions.currency_id,transactions.seller_id,transaction_time,transaction_method  FROM transactions where user_id = ?;";
 			ArrayList<Transaction> list = new ArrayList<>();
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
@@ -65,6 +66,8 @@ public class TransactionDAO {
 					
 				try (ResultSet resultSet = pst.executeQuery()) {
 
+					
+					
 					while (resultSet.next()) {
 						Transaction trans = resultSetToTransactions(resultSet);
 						list.add(trans);
@@ -76,7 +79,7 @@ public class TransactionDAO {
 		} catch (SQLException e) {
 			throw new DaoException(e.getMessage());
 		}
-	}
+	} 
 	
 	
 	

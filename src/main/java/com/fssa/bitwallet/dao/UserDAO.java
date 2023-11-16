@@ -53,15 +53,14 @@ public class UserDAO {
 
 			int id = getIdByEmail(user.getEmail());
 
-			String query = "update user SET username = ?,dob = ?, email = ?, userrole = ?,password = ? where id = ?";
+			String query = "update user SET username = ?,dob = ? where id = ?";
 
 			try (PreparedStatement pst = con.prepareStatement(query)) {
 
 				pst.setString(1, user.getUsername());
 				pst.setDate(2, java.sql.Date.valueOf(user.getDOB()));
-				pst.setString(3, user.getEmail());
-				pst.setString(5, user.getPassword());
-				pst.setInt(6, id);
+				
+				pst.setInt(3, id);
 
 				int rowsAffected = pst.executeUpdate();
 

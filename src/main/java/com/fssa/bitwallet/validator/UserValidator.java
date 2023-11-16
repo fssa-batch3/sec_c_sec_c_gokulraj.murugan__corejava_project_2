@@ -18,14 +18,14 @@ public class UserValidator {
 
 		validateName(user.getUsername());
 	validateEmail(user.getEmail());
-		validatePassword(user.getPassword());
+//		validatePassword(user.getPassword());
 
 		validateDOB(user.getDOB());
 
 		return true;
 	}
 
-	public static boolean validateId(int id) throws InvalidInputException {
+	public static boolean validateId(int id) throws InvalidInputException{
 
 		if (id <= 0) {
 			throw new InvalidInputException(UserValidatorError.INVALID_ID);
@@ -73,7 +73,7 @@ public class UserValidator {
 		if (password == null || password.isEmpty()) {
 			throw new InvalidInputException(UserValidatorError.INVALID_PASSWORD_NULL);
 		}
-
+  
 		String regex = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$";
 
 		Pattern pattern = Pattern.compile(regex);

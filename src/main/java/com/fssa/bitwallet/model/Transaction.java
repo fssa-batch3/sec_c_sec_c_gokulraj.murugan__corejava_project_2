@@ -11,7 +11,6 @@ public class Transaction {
 	private int currencyId;
 	private double amount;
 	private double quantity;
-	
 	private String transactionMethod;
 	private LocalDate transactionTime;
 
@@ -34,6 +33,8 @@ public class Transaction {
 	public String getTransactionType() {
 		return transactionType;
 	}
+	
+	
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
